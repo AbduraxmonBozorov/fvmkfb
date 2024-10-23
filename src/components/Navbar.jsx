@@ -14,7 +14,7 @@ function Navbar() {
           to="/"
         >
           <svg
-            class="fill-current"
+            className="fill-current"
             width="18"
             height="18"
             viewBox="0 0 18 18"
@@ -37,7 +37,7 @@ function Navbar() {
           to="/"
         >
           <svg
-            class="fill-current"
+            className="fill-current"
             width="18"
             height="18"
             viewBox="0 0 18 18"

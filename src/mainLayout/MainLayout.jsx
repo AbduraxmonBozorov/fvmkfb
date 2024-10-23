@@ -11,7 +11,7 @@ function MainLayout({children}) {
         </div>
         <div className='flex flex-col w-5/6 h-screen'>
             <Header></Header>
-            <div className='content'>
+            <div className='content bg-neutral-100 bg-red' style={{height: "calc(100vh - 80px)"}}>
                 {children}
             </div>
         </div>
