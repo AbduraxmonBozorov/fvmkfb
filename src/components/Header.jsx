@@ -11,7 +11,7 @@ function Header() {
   return (
     <div className="header w-full border shadow h-[80px] flex flex-row items-center justify-end p-5 box-border">
       <div
-        className="user flex flex-row items-center gap-2 cursor-pointer relative border"
+        className="user flex flex-row items-center gap-2 cursor-pointer relative"
         onClick={handleProfile}
       >
         <div className="fish flex flex-col items-end justify-center">
