@@ -8,9 +8,9 @@ function DropDown() {
   }
 
   return (
-    <div className='border flex flex-col bg-white'>
-        <Link className='p-2 border hover:bg-slate-100' to="">Profile</Link>
-        <Link className='p-2 border hover:bg-slate-100' to="/login" onClick={handleLoginOut}>Log out</Link>
+    <div className='flex flex-col bg-white shadow'>
+        <Link className='p-2  hover:bg-slate-100' to="">Profile</Link>
+        <Link className='p-2  hover:bg-slate-100' to="/login" onClick={handleLoginOut}>Log out</Link>
     </div>
   )
 }
