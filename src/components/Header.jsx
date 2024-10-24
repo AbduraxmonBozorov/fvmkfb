@@ -23,7 +23,7 @@ function Header() {
         </div>
 
         {profile && (
-          <div className="userDropDown border border-red-500 absolute top-full w-full p-3">
+          <div className="userDropDown absolute top-full start-0 w-full">
             <DropDown></DropDown>
           </div>
         )}
