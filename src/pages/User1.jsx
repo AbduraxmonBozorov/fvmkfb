@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-function User() {
+function User1() {
   return (
     <div className="w-full h-full overflow-y-auto bg-slate-100 p-3 md:p-10">
 
@@ -53,4 +53,4 @@ function User() {
   );
 }
 
-export default User;
+export default User1;

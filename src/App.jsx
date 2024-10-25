@@ -4,7 +4,7 @@ import MainLayout from "./mainLayout/MainLayout";
 import Dashboard from "./pages/rahbariyat/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import User from "./pages/User";
+import User1 from "./pages/User1";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,7 +47,7 @@ function App() {
           element={
             isAuthenticated ? (
               <MainLayout>
-                <User />
+                <User1 />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
