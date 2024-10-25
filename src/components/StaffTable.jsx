@@ -60,7 +60,7 @@ function StaffTable() {
       </div>
       <table
         className="table-auto border border-collapse border-boxdark mx-auto table-striped"
-        style={{ width: "1200px" }}
+        style={{ width: "1000px" }}
       >
         <thead className="bg-emerald-950 text-black">
           <tr>

@@ -1,10 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate()
+
+  function handleLogo(){
+    navigate("/")
+  }
   return (
     <div>
-      <h1 className="logo text-white text-3xl font-medium tracking-wide">
+      <h1 onClick={handleLogo} className="logo cursor-pointer text-white text-3xl font-medium tracking-wide">
         FVMKFB
       </h1>
 
