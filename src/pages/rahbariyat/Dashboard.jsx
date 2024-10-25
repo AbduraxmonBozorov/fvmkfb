@@ -2,12 +2,14 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons/faUsers";
 import { faArrowUp, faArrowDown, faUserTie, faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import StaffTable from "../../components/StaffTable";
 
 
 function Dashboard() {
   return (
     <div className="border border-blue-500 w-full h-full overflow-y-auto bg-slate-100">
-      <div className="about-staff border border-red-500 text-justify w-10/12 mx-auto grid grid-cols-4 gap-5">
+
+      <div className="about-staff text-justify w-10/12 mx-auto grid grid-cols-4 gap-5">
         
         <div className="all-staff  p-2 md:p-5 cursor-pointer bg-white">
           <div className="img  w-16 rounded-full h-16 flex items-center justify-center bg-slate-200">
@@ -64,6 +66,11 @@ function Dashboard() {
         </div>
 
       </div>
+
+      <div className="table w-10/12 mx-auto mt-10">
+        <StaffTable />
+      </div>
+
     </div>
   );
 }
