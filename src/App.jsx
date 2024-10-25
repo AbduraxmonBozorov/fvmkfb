@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import MainLayout from './mainLayout/MainLayout';
-import Dashboard from './pages/rahbariyat/dashboard';
-import Register from './pages/Register';
-import Login from './pages/Login';
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import MainLayout from "./mainLayout/MainLayout";
+import Dashboard from "./pages/rahbariyat/dashboard";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import User from "./pages/User";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
     if (token) {
       setIsAuthenticated(true);
     }
   }, []);
 
   const handleLogin = (token) => {
-    localStorage.setItem('authToken', token);
+    localStorage.setItem("authToken", token);
     setIsAuthenticated(true);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
     setIsAuthenticated(false);
   };
 
@@ -34,6 +35,19 @@ function App() {
             isAuthenticated ? (
               <MainLayout>
                 <Dashboard onLogout={handleLogout} />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/user/:id"
+          element={
+            isAuthenticated ? (
+              <MainLayout>
+                <User />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
