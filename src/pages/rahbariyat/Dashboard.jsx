@@ -17,16 +17,16 @@ function Dashboard() {
   return (
     <div className="w-full h-full overflow-y-auto bg-slate-100">
       <div className="about-staff text-justify w-10/12 mx-auto grid grid-cols-4 gap-5 mt-5">
-        <div className="all-staff p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
-          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-slate-200">
+        <div className="all-staff bg-gradient-to-r from-green-600 to-green-500 p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
+          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-white">
             <FontAwesomeIcon icon={faUsers} className="text-2xl" />
           </div>
           <div className="mt-5 flex flex-row justify-between">
             <div>
-              <h2 className="text-2xl font-semibold">545</h2>
-              <p className="text-gray-600">Jami xodimlar</p>
+              <h2 className="text-2xl text-white font-semibold">545</h2>
+              <p className="text-white">Jami xodimlar</p>
             </div>
-            <div className="persentage flex items-center text-green-600">
+            <div className="persentage mt-8 flex items-center text-white">
               <span>0.43</span>
               <span>%</span>
               <FontAwesomeIcon icon={faArrowUp} />
@@ -34,16 +34,16 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="bachalor-staff p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
-          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-slate-200">
+        <div className="bachalor-staff bg-gradient-to-r from-blue-600 to-blue-500 p-2 md:p-5 cursor-pointer rounded-lg shadow hover:shadow-lg transition-all">
+          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-white">
             <FontAwesomeIcon icon={faUserTie} className="text-2xl" />
           </div>
           <div className="mt-5 flex flex-row justify-between">
             <div>
-              <h2 className="text-2xl font-semibold">375</h2>
-              <p className="text-gray-600">Oliy malumotli</p>
+              <h2 className="text-2xl text-white font-semibold">375</h2>
+              <p className="text-white">Oliy malumotli</p>
             </div>
-            <div className="persentage flex items-center text-green-600">
+            <div className="persentage flex items-center mt-8 text-white">
               <span>4.35</span>
               <span>%</span>
               <FontAwesomeIcon icon={faArrowUp} />
@@ -51,16 +51,16 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="medium-staff p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
-          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-slate-200">
+        <div className="medium-staff bg-gradient-to-r from-purple-600 to-purple-500 p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
+          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-white">
             <FontAwesomeIcon icon={faUser} className="text-2xl" />
           </div>
           <div className="mt-5 flex flex-row justify-between">
             <div>
-              <h2 className="text-2xl font-semibold">170</h2>
-              <p className="text-gray-600">O'rta maxsus</p>
+              <h2 className="text-2xl text-white font-semibold">170</h2>
+              <p className="text-white">O'rta maxsus</p>
             </div>
-            <div className="persentage flex items-center text-blue-600">
+            <div className="persentage mt-8 flex items-center text-white">
               <span>2.8</span>
               <span>%</span>
               <FontAwesomeIcon icon={faArrowDown} />
@@ -68,12 +68,12 @@ function Dashboard() {
           </div>
         </div>
 
-        <div onClick={openModal} className="new-staff p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
-          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-slate-200">
+        <div onClick={openModal} className="new-staff bg-gradient-to-r from-red-600 to-red-500 p-2 md:p-5 cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition-all">
+          <div className="img w-16 rounded-full h-16 flex items-center justify-center bg-white">
             <FontAwesomeIcon icon={faUserPlus} className="text-2xl" />
           </div>
-          <div className="mt-5 flex flex-row justify-between">
-            <span className="text-blue-600 font-medium">Yangi xodim qo'shish</span>
+          <div className="mt-12 flex flex-row justify-between">
+            <span className="text-white font-medium">Yangi xodim qo'shish</span>
           </div>
         </div>
       </div>
@@ -88,16 +88,16 @@ function Dashboard() {
             <button onClick={closeModal} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
           <h3 className="font-bold text-lg mb-6">Yangi xodim qo'shish</h3>
-          
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text">Ism</span>
               </label>
-              <input 
-                type="text" 
-                placeholder="Ismni kiriting" 
-                className="input input-bordered w-full" 
+              <input
+                type="text"
+                placeholder="Ismni kiriting"
+                className="input input-bordered w-full"
               />
             </div>
 
@@ -105,10 +105,10 @@ function Dashboard() {
               <label className="label">
                 <span className="label-text">Familiya</span>
               </label>
-              <input 
-                type="text" 
-                placeholder="Familiyani kiriting" 
-                className="input input-bordered w-full" 
+              <input
+                type="text"
+                placeholder="Familiyani kiriting"
+                className="input input-bordered w-full"
               />
             </div>
 
@@ -116,10 +116,10 @@ function Dashboard() {
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input 
-                type="email" 
-                placeholder="Email manzilini kiriting" 
-                className="input input-bordered w-full" 
+              <input
+                type="email"
+                placeholder="Email manzilini kiriting"
+                className="input input-bordered w-full"
               />
             </div>
 
@@ -127,10 +127,10 @@ function Dashboard() {
               <label className="label">
                 <span className="label-text">Parol</span>
               </label>
-              <input 
-                type="password" 
-                placeholder="Parolni kiriting" 
-                className="input input-bordered w-full" 
+              <input
+                type="password"
+                placeholder="Parolni kiriting"
+                className="input input-bordered w-full"
               />
             </div>
 
@@ -138,9 +138,9 @@ function Dashboard() {
               <label className="label">
                 <span className="label-text">Rasm</span>
               </label>
-              <input 
-                type="file" 
-                className="file-input file-input-bordered w-full" 
+              <input
+                type="file"
+                className="file-input file-input-bordered w-full"
               />
             </div>
 
@@ -148,9 +148,9 @@ function Dashboard() {
               <label className="label">
                 <span className="label-text">Ishga kirgan sana</span>
               </label>
-              <input 
-                type="date" 
-                className="input input-bordered w-full" 
+              <input
+                type="date"
+                className="input input-bordered w-full"
               />
             </div>
 
