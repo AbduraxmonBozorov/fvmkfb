@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./mainLayout/MainLayout";
-import Dashboard from "./pages/rahbariyat/dashboard";
+import Dashboard from "./pages/rahbariyat/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import User from "./pages/User";
-
+import User from "./pages/USer";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
