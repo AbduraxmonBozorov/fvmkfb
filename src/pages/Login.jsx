@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({setIsAuthenticated}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    password: ''
+    firstName: "",
+    lastName: "",
+    password: "",
   });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Kirish ma\'lumotlari:', formData);
+    console.log("Kirish ma'lumotlari:", formData);
 
-    const mockToken = '1234567890abcdef';
-    
-    setIsAuthenticated(mockToken);
-    navigate('/');
+    const mockToken = "1234567890abcdef";
+
+    localStorage.setItem("token", mockToken);
+    setIsAuthenticated(true);
+    navigate("/");
   };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -38,7 +39,10 @@ const Login = ({ setIsAuthenticated }) => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="firstName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Ism
               </label>
               <input
@@ -54,7 +58,10 @@ const Login = ({ setIsAuthenticated }) => {
             </div>
 
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="lastName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Familiya
               </label>
               <input
@@ -70,14 +77,17 @@ const Login = ({ setIsAuthenticated }) => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Parol
               </label>
               <div className="mt-1 relative">
                 <input
                   id="password"
                   name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   required
                   value={formData.password}
                   onChange={handleChange}
@@ -108,8 +118,11 @@ const Login = ({ setIsAuthenticated }) => {
         </form>
 
         <p className="mt-4 text-center text-sm text-gray-600">
-          Hisobingiz yo'qmi?{' '}
-          <a href="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+          Hisobingiz yo'qmi?{" "}
+          <a
+            href="/register"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Ro'yxatdan o'tish
           </a>
         </p>

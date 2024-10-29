@@ -5,26 +5,29 @@ import Dashboard from "./pages/rahbariyat/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import User1 from "./pages/User1";
+import { useSelector } from "react-redux";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const token = useSelector(state => state.token);
+  console.log(token);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
+    if (token=="none") {
+      setIsAuthenticated(false);
+    }else{
+      setIsAuthenticated(true)
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
       setIsAuthenticated(true);
+    }else{
+      setIsAuthenticated(false)
     }
   }, []);
 
-  const handleLogin = (token) => {
-    localStorage.setItem("authToken", token);
-    setIsAuthenticated(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    setIsAuthenticated(false);
-  };
 
   return (
     <div>
@@ -34,10 +37,10 @@ function App() {
           element={
             isAuthenticated ? (
               <MainLayout>
-                <Dashboard onLogout={handleLogout} />
+                <Dashboard />
               </MainLayout>
             ) : (
-              <Navigate to="/login" replace />
+              <Navigate to="/login"  />
             )
           }
         />
@@ -50,7 +53,7 @@ function App() {
                 <User1 />
               </MainLayout>
             ) : (
-              <Navigate to="/login" replace />
+              <Navigate to="/login"  />
             )
           }
         />
@@ -59,9 +62,9 @@ function App() {
           path="/register"
           element={
             isAuthenticated ? (
-              <Navigate to="/" replace />
+              <Navigate to="/"  />
             ) : (
-              <Register setIsAuthenticated={handleLogin} />
+              <Register />
             )
           }
         />
@@ -70,9 +73,9 @@ function App() {
           path="/login"
           element={
             isAuthenticated ? (
-              <Navigate to="/" replace />
+              <Navigate to="/"  />
             ) : (
-              <Login setIsAuthenticated={handleLogin} />
+              <Login setIsAuthenticated={setIsAuthenticated} />
             )
           }
         />
