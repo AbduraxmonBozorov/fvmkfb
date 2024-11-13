@@ -147,23 +147,29 @@ function NewEmployeeModal({ onClose, onSubmit }) {
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md"
+        className="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 space-y-4"
       >
-        <h2 className="text-2xl font-bold mb-4">Yangi hodim qo'shish</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="name" placeholder="Ism" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="text" name="surname" placeholder="Familiya" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="email" name="email" placeholder="Email" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="password" name="password" placeholder="Parol" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="text" name="department" placeholder="Bo'lim" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="text" name="position" placeholder="Lavozim" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="text" name="education" placeholder="Ma'lumoti" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="text" name="grade" placeholder="Razryadi" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="date" name="startDate" onChange={handleChange} className="w-full p-2 border rounded" required />
-          <input type="file" name="image" onChange={handleChange} className="w-full p-2 border rounded" />
-          <div className="flex justify-between items-center">
-            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Qo'shish</button>
-            <button type="button" onClick={onClose} className="bg-red-600 text-white px-4 py-2 rounded">Yopish</button>
+        <h2 className="text-2xl font-bold mb-4 text-center">Yangi hodim qo'shish</h2>
+
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="name" placeholder="Ism" onChange={handleChange} className="input input-bordered w-full" required />
+          <input type="text" name="surname" placeholder="Familiya" onChange={handleChange} className="input input-bordered w-full" required />
+
+          <input type="email" name="email" placeholder="Email" onChange={handleChange} className="input input-bordered w-full" required />
+          <input type="password" name="password" placeholder="Parol" onChange={handleChange} className="input input-bordered w-full" required />
+
+          <input type="text" name="department" placeholder="Bo'lim" onChange={handleChange} className="input input-bordered w-full" required />
+          <input type="text" name="position" placeholder="Lavozim" onChange={handleChange} className="input input-bordered w-full" required />
+
+          <input type="text" name="education" placeholder="Ma'lumoti" onChange={handleChange} className="input input-bordered w-full" required />
+          <input type="text" name="grade" placeholder="Razryadi" onChange={handleChange} className="input input-bordered w-full" required />
+
+          <input type="date" name="startDate" onChange={handleChange} className="input input-bordered w-full" required />
+          <input type="file" name="image" onChange={handleChange} className="input input-bordered w-full" />
+
+          <div className="col-span-1 md:col-span-2 flex justify-between mt-4">
+            <button type="submit" className="btn btn-primary">Qo'shish</button>
+            <button type="button" onClick={onClose} className="btn btn-error">Yopish</button>
           </div>
         </form>
       </motion.div>
