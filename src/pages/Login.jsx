@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const Login = ({ setIsAuthenticated }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    
+    login: '',
     password: ''
   });
   const navigate = useNavigate();
@@ -37,32 +37,17 @@ const Login = ({ setIsAuthenticated }) => {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
+           
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                Ism
+              <label htmlFor="login" className="block text-sm font-medium text-gray-700">
+                Login
               </label>
               <input
-                id="firstName"
-                name="firstName"
+                id="login"
+                name="login"
                 type="text"
                 required
-                value={formData.firstName}
-                onChange={handleChange}
-                className="appearance-none relative block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Ism"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                Familiya
-              </label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                required
-                value={formData.lastName}
+                value={formData.login}
                 onChange={handleChange}
                 className="appearance-none relative block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Familiya"
