@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Home, Users, FileText, Settings, LogOut } from 'lucide-react';
 
 const sidebarVariants = {
@@ -23,35 +24,45 @@ export default function Layout({ children }) {
         </div>
         <ul className="space-y-2 p-4">
           <li>
-            <a href="#" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
+            <Link to="/" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <Home size={20} />
               <span>Bosh sahifa</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
+            <Link to="/users" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <Users size={20} />
               <span>Hodimlar</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
+            <Link to="/reports" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <FileText size={20} />
               <span>Hisobotlar</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
+            <Link to="/tasks" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
+              <FileText size={20} />
+              <span>Vazifalar</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/settings" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <Settings size={20} />
               <span>Sozlamalar</span>
-            </a>
+            </Link>
           </li>
         </ul>
+
         <div className="absolute bottom-0 w-full p-4">
-          <button className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2 w-full">
-            <LogOut size={20} />
-            <span>Chiqish</span>
-          </button>
+          <Link to='/login'>
+            <button className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2 w-full">
+              <LogOut size={20} />
+              <span>Chiqish</span>
+            </button>
+          </Link>
+
         </div>
       </motion.nav>
 

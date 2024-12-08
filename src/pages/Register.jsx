@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../redux/userSlice';
 import { Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user);
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     phoneNumber: '',
-    password: ''
+    password: '',
   });
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Ro\'yxatdan o\'tish ma\'lumotlari:', formData);
-    // ----- Backendi yozilgandan keyin axiosdan foydalanib logika qo'shamiz bu yeriga ----- //
-    navigate('/login'); 
+    dispatch(registerUser(formData));
   };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -32,7 +33,6 @@ const Register = () => {
         <h2 className="text-center text-3xl font-bold text-gray-900">
           Ro'yxatdan o'tish
         </h2>
-        
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
@@ -50,7 +50,6 @@ const Register = () => {
                 placeholder="Ism"
               />
             </div>
-            
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
                 Familiya
@@ -66,7 +65,6 @@ const Register = () => {
                 placeholder="Familiya"
               />
             </div>
-            
             <div>
               <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
                 Telefon raqam
@@ -82,7 +80,6 @@ const Register = () => {
                 placeholder="+998 XX XXX XX XX"
               />
             </div>
-            
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Parol
@@ -91,7 +88,7 @@ const Register = () => {
                 <input
                   id="password"
                   name="password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   required
                   value={formData.password}
                   onChange={handleChange}
@@ -103,30 +100,20 @@ const Register = () => {
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
+                  {showPassword ? <EyeOff className="h-5 w-5 text-gray-400" /> : <Eye className="h-5 w-5 text-gray-400" />}
                 </button>
               </div>
             </div>
           </div>
-
           <button
             type="submit"
+            disabled={loading}
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Ro'yxatdan o'tish
+            {loading ? 'Yuklanmoqda...' : "Ro'yxatdan o'tish"}
           </button>
         </form>
-        
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Allaqachon hisobingiz bormi?{' '}
-          <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Kirish
-          </a>
-        </p>
+        {error && <p className="mt-4 text-center text-sm text-red-600">{error.message || 'Xatolik yuz berdi'}</p>}
       </div>
     </div>
   );
