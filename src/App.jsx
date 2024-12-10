@@ -5,6 +5,7 @@ import Dashboard from "./pages/rahbariyat/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import User1 from "./pages/User1";
+import Tasks from "./pages/Tasks";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,6 +36,19 @@ function App() {
             isAuthenticated ? (
               <MainLayout>
                 <Dashboard onLogout={handleLogout} />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/tasks"
+          element={
+            isAuthenticated ? (
+              <MainLayout>
+                <Tasks onLogout={handleLogout} />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />

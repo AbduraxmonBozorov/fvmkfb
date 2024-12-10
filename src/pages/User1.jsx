@@ -10,7 +10,7 @@ function User1() {
 
       <Link to="/" className="hover:text-sky-700">
         <FontAwesomeIcon icon={faArrowLeft} />
-        <span>Orqaga</span>
+        <span className="ml-2">Qaytish</span>
       </Link>
 
       <div className="about-user mt-3">
