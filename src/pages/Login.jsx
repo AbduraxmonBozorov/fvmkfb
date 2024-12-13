@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const Login = ({ setIsAuthenticated }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    
     login: '',
     password: ''
   });
