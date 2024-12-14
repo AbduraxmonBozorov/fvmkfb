@@ -10,6 +10,8 @@ import Tasks from "./pages/Tasks";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
