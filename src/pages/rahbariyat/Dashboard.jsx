@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Users, GraduationCap, BookOpen, UserPlus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -35,6 +36,7 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
 )
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [employees, setEmployees] = useState([
     { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
@@ -45,6 +47,11 @@ export default function Dashboard() {
   const addEmployee = (newEmployee) => {
     setEmployees([...employees, { id: employees.length + 1, ...newEmployee }])
     setIsModalOpen(false)
+  }
+
+  function handleUser(id){
+    console.log(id);
+    navigate("/user/id");
   }
 
   return (
@@ -90,6 +97,9 @@ export default function Dashboard() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
+                  onClick={()=>{handleUser(employee.id)}}
+                  style={{"cursor": "pointer"}}
+                  className="hover:bg-gray-100 hover:text-blue-600 transition duration-300"
                 >
                   <td className="px-6 py-4 whitespace-nowrap">{employee.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{employee.department}</td>

@@ -8,7 +8,7 @@ function User1() {
   return (
     <div className="w-full h-full overflow-y-auto bg-slate-100 p-3 md:p-10">
 
-      <Link to="/" className="hover:text-sky-700">
+      <Link to="/" className="hover:text-sky-700 border rounded-lg bg-gray-200 px-2 py-3">
         <FontAwesomeIcon icon={faArrowLeft} />
         <span className="ml-2">Qaytish</span>
       </Link>
