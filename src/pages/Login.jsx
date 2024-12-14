@@ -1,29 +1,44 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import http from "../utils/axios";
 
 const Login = ({ setIsAuthenticated }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    login: '',
-    password: ''
+    email: "",
+    phone: "",
   });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Kirish ma\'lumotlari:', formData);
-
-    const mockToken = '1234567890abcdef';
-    
-    setIsAuthenticated(mockToken);
-    navigate('/');
+    console.log(formData);
+    // http.post("/user/login", formData)
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
+    fetch("http://localhost:4000/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value 
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -36,17 +51,19 @@ const Login = ({ setIsAuthenticated }) => {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
-           
             <div>
-              <label htmlFor="login" className="block text-sm font-medium text-gray-700">
-                Login
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
               </label>
               <input
-                id="login"
-                name="login"
-                type="text"
+                id="email"
+                name="email"
+                type="email"
                 required
-                value={formData.login}
+                value={formData.email}
                 onChange={handleChange}
                 className="appearance-none relative block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Familiya"
@@ -54,16 +71,19 @@ const Login = ({ setIsAuthenticated }) => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Parol
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Phone
               </label>
               <div className="mt-1 relative">
                 <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  id="phone"
+                  name="phone"
+                  type="text"
                   required
-                  value={formData.password}
+                  value={formData.phone}
                   onChange={handleChange}
                   className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="••••••••"
@@ -90,13 +110,6 @@ const Login = ({ setIsAuthenticated }) => {
             Kirish
           </button>
         </form>
-
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Hisobingiz yo'qmi?{' '}
-          <a href="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Ro'yxatdan o'tish
-          </a>
-        </p>
       </div>
     </div>
   );
