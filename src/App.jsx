@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import MainLayout from "./mainLayout/MainLayout";
 import Dashboard from "./pages/rahbariyat/Dashboard";
 import Register from "./pages/Register";
@@ -8,15 +8,15 @@ import User1 from "./pages/User1";
 import Tasks from "./pages/Tasks";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  
+  const token = localStorage.getItem("token")
+    ? localStorage.getItem("token")
+    : null;
+  const [isAuthenticated, setIsAuthenticated] = useState(token ? true : false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    const token = localStorage.getItem("authToken"); // authToken ni tekshirish
+    setIsAuthenticated(!!token);
   }, []);
 
   const handleLogin = (token) => {
@@ -27,6 +27,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setIsAuthenticated(false);
+    navigate("/login");
   };
 
   return (
@@ -81,14 +82,14 @@ function App() {
             )
           }
         />
-{/* 11.12.2024 */}
+        {/* 11.12.2024 */}
         <Route
           path="/login"
           element={
             isAuthenticated ? (
               <Navigate to="/" replace />
             ) : (
-              <Login setIsAuthenticated={handleLogin} />
+              <Login setIsAuthenticated={setIsAuthenticated} />
             )
           }
         />

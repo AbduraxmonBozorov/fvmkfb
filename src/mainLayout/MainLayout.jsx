@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Home, Users, FileText, Settings, LogOut } from 'lucide-react';
 
 const sidebarVariants = {
@@ -10,6 +10,13 @@ const sidebarVariants = {
 
 export default function Layout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const navigate = useNavigate();
+
+  
+  function handleLogOut(){
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  }
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
@@ -56,7 +63,7 @@ export default function Layout({ children }) {
         </ul>
 
         <div className="absolute bottom-0 w-full p-4">
-          <Link to='/login'>
+          <Link to='' onClick={handleLogOut}>
             <button className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2 w-full">
               <LogOut size={20} />
               <span>Chiqish</span>
