@@ -8,15 +8,11 @@ const sidebarVariants = {
   closed: { x: "-100%" },
 };
 
-export default function Layout({ children }) {
+export default function Layout({ children, handleLogout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const navigate = useNavigate();
 
   
-  function handleLogOut(){
-    localStorage.removeItem("authToken");
-    navigate("/login");
-  }
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
@@ -63,7 +59,7 @@ export default function Layout({ children }) {
         </ul>
 
         <div className="absolute bottom-0 w-full p-4">
-          <Link to='' onClick={handleLogOut}>
+          <Link to='' onClick={handleLogout}>
             <button className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2 w-full">
               <LogOut size={20} />
               <span>Chiqish</span>

@@ -37,7 +37,7 @@ function App() {
           path="/"
           element={
             isAuthenticated ? (
-              <MainLayout>
+              <MainLayout handleLogout={handleLogout}>
                 <Dashboard onLogout={handleLogout} />
               </MainLayout>
             ) : (
@@ -50,7 +50,7 @@ function App() {
           path="/tasks"
           element={
             isAuthenticated ? (
-              <MainLayout>
+              <MainLayout handleLogout={handleLogout}>
                 <Tasks onLogout={handleLogout} />
               </MainLayout>
             ) : (
@@ -63,7 +63,7 @@ function App() {
           path="/user/:id"
           element={
             isAuthenticated ? (
-              <MainLayout>
+              <MainLayout handleLogout={handleLogout}>
                 <User1 />
               </MainLayout>
             ) : (
