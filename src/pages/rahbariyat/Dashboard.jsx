@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Users, GraduationCap, BookOpen, UserPlus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +22,7 @@ const itemVariants = {
 }
 
 const StatCard = ({ icon: Icon, title, value, color }) => (
-  <motion.div
+  <div
     variants={itemVariants}
     className={`bg-white rounded-lg shadow-md p-6 flex items-center space-x-4 ${color}`}
   >
@@ -32,13 +31,49 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
       <h3 className="text-lg font-semibold text-gray-700">{title}</h3>
       <p className="text-3xl font-bold">{value}</p>
     </div>
-  </motion.div>
+  </div>
 )
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [employees, setEmployees] = useState([
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
+    { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
+    { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
+    { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
     { id: 1, name: "Aziz Rahimov", department: "IT", position: "Dasturchi", education: "Oliy", grade: "Senior" },
     { id: 2, name: "Malika Karimova", department: "Marketing", position: "Menejer", education: "Oliy", grade: "Middle" },
     { id: 3, name: "Jasur Aliyev", department: "Moliya", position: "Hisobchi", education: "O'rta maxsus", grade: "Junior" },
@@ -55,7 +90,7 @@ export default function Dashboard() {
   }
 
   return (
-    <motion.div
+    <div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -66,7 +101,7 @@ export default function Dashboard() {
         <StatCard icon={Users} title="Jami hodimlar" value={150} color="text-blue-600" />
         <StatCard icon={GraduationCap} title="Oliy ma'lumotli" value={100} color="text-green-600" />
         <StatCard icon={BookOpen} title="O'rta maxsus" value={50} color="text-yellow-600" />
-        <motion.button
+        <button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsModalOpen(true)}
@@ -74,13 +109,13 @@ export default function Dashboard() {
         >
           <UserPlus size={40} />
           <span className="text-lg font-semibold">Yangi hodim qo'shish</span>
-        </motion.button>
+        </button>
       </div>
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <h3 className="text-xl font-semibold p-4 bg-gray-50">Hodimlar ro'yxati</h3>
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full border border-red-500" style={{height: "500px", overflow: "hidden"}}>
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">F.I.SH</th>
@@ -90,9 +125,9 @@ export default function Dashboard() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Razryadi</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-gray-200 border border-blue-500 max-h-80 overflow-y-scroll">
               {employees.map((employee) => (
-                <motion.tr
+                <tr
                   key={employee.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -101,12 +136,12 @@ export default function Dashboard() {
                   style={{"cursor": "pointer"}}
                   className="hover:bg-gray-100 hover:text-blue-600 transition duration-300"
                 >
-                  <td className="px-6 py-4 whitespace-nowrap">{employee.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{employee.department}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{employee.position}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{employee.education}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{employee.grade}</td>
-                </motion.tr>
+                  <td className="px-4 py-2 whitespace-nowrap">{employee.name}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{employee.department}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{employee.position}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{employee.education}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{employee.grade}</td>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -116,7 +151,7 @@ export default function Dashboard() {
       {isModalOpen && (
         <NewEmployeeModal onClose={() => setIsModalOpen(false)} onSubmit={addEmployee} />
       )}
-    </motion.div>
+    </div>
   )
 }
 
@@ -148,13 +183,13 @@ function NewEmployeeModal({ onClose, onSubmit }) {
   }
 
   return (
-    <motion.div
+    <div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
     >
-      <motion.div
+      <div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         className="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 space-y-4"
@@ -182,7 +217,7 @@ function NewEmployeeModal({ onClose, onSubmit }) {
             <button type="button" onClick={onClose} className="btn btn-error">Yopish</button>
           </div>
         </form>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }
