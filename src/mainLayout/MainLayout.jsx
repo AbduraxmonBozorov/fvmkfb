@@ -35,19 +35,14 @@ export default function Layout({ children, handleLogout }) {
           <li>
             <Link to="/users" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <Users size={20} />
-              <span>Hodimlar</span>
+              <span>Xodim qo'shish</span>
             </Link>
           </li>
-          <li>
-            <Link to="/reports" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
-              <FileText size={20} />
-              <span>Hisobotlar</span>
-            </Link>
-          </li>
+        
           <li>
             <Link to="/tasks" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <FileText size={20} />
-              <span>Vazifalar</span>
+              <span>Topshiriqlar</span>
             </Link>
           </li>
           <li>

@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import userImage from "../assets/images/circle-user-regular.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 function User1() {
+  const [user, setUser] = useState({});
+  const userId = useLocation().pathname.split("/user/")[1];
+  console.log(userId);
+  useEffect(() => {
+    if(userId){
+      fetch(`/api/user/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser({})
+        setUser(data);
+      })
+      .catch((error) => console.error(error));
+    }
+  }, [userId]);
+
   return (
     <div className="w-full h-full overflow-y-auto bg-slate-100 p-3 md:p-10">
-
-      <Link to="/" className="hover:text-sky-700 border rounded-lg bg-gray-200 px-2 py-3">
+      <Link
+        to="/"
+        className="hover:text-sky-700 border rounded-lg bg-gray-200 px-2 py-3"
+      >
         <FontAwesomeIcon icon={faArrowLeft} />
         <span className="ml-2">Qaytish</span>
       </Link>
@@ -16,19 +33,29 @@ function User1() {
       <div className="about-user mt-3">
         <div className="fish flex flex-row justify-between">
           <div>
-            <h2 className="text-5xl font-medium">Ism</h2>
-            <h2 className="text-5xl font-medium">Familiya</h2>
+            <h2 className="text-5xl font-medium">
+              {user.fullname ? user.fullname.split(" ")[1] : "Ism"}
+            </h2>
+            <h2 className="text-5xl font-medium">
+              {user.fullname ? user.fullname.split(" ")[0] : "Familiya"}
+            </h2>
           </div>
           <div className="user-image w-32 h-32 border rounded-full">
-            <img src={userImage} className="w-full object-cover" alt="" />
+            <img
+              src={user.picture ? user.picture : userImage}
+              className="w-full object-cover"
+              alt=""
+            />
           </div>
         </div>
         <div className="about-work">
           <h2 className="text-2xl">
-            Bo'lim: <span>Qurilish</span>
+            Bo'lim:{" "}
+            <span>{user.department ? user.department : "Mavjud emas"}</span>
           </h2>
           <h2 className="text-2xl">
-            Lavozim: <span>Bosh mutaxasis</span>
+            Lavozim:{" "}
+            <span>{user.position ? user.position : "Aniqlanmagan"}</span>
           </h2>
         </div>
       </div>
@@ -47,8 +74,6 @@ function User1() {
           <span className="absolute bottom-1 right-1 ">8</span>
         </div>
       </div>
-
-      
     </div>
   );
 }

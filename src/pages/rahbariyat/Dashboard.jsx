@@ -43,20 +43,22 @@ export default function Dashboard() {
   useEffect(()=>{
     fetch('/api/user?page=1&limit=12')
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      setEmployees(data.users)
+    })    
     .catch((error) => console.error(error));
-  })
+  }, []);
+  
+  
 
   const addEmployee = (newEmployee) => {
     setEmployees([...employees, { id: employees.lengdiv + 1, ...newEmployee }]);
     setIsModalOpen(false);
   };
-  console.log(employees);
   
 
   function handleUser(id) {
-    console.log(id);
-    navigate("/user/id");
+    navigate(`user/${id}`)
   }
 
   return (
@@ -68,7 +70,7 @@ export default function Dashboard() {
         <StatCard
           icon={Users}
           title="Jami hodimlar"
-          value={150}
+          value={employees.length}
           color="text-blue-600"
         />
         <StatCard
@@ -116,9 +118,10 @@ export default function Dashboard() {
                 <div
                   key={id}
                   className="tbody-tr flex flex-row justify-between align-middle hover:bg-gray-100 hover:text-blue-300 cursor-pointer"
+                  onClick={()=>{handleUser(employee.user_id)}}
                 >
                   <h2 className="w-full py-2 px-3 text-xl">
-                    {employee.name}
+                    {employee.fullname}
                   </h2>
                   <h2 className="w-full py-2 px-3 text-xl">
                     {employee.department}
