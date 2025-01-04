@@ -52,7 +52,7 @@ export default function Dashboard() {
   
 
   const addEmployee = (newEmployee) => {
-    setEmployees([...employees, { id: employees.lengdiv + 1, ...newEmployee }]);
+    setEmployees([...employees, { id: employees.length + 1, ...newEmployee }]);
     setIsModalOpen(false);
   };
   
@@ -180,9 +180,8 @@ function NewEmployeeModal({ onClose, onSubmit }) {
   };
 
   const handleSubmit = (e) => {
-    e.prevendivefault();
-    onSubmit(formData);
-
+    e.preventDefault(); // Formani default submit qilmaslik uchun
+    onSubmit(formData); // Modalni yopish va hodimni qo'shish
   };
 
   return (

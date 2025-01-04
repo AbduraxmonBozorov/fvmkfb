@@ -6,28 +6,28 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import User1 from "./pages/User1";
 import Tasks from "./pages/Tasks";
+import AddUser from "./pages/rahbariyat/AddUser";
 
 function App() {
-  const token = localStorage.getItem("token")
-    ? localStorage.getItem("token")
-    : null;
+  const token = localStorage.getItem("authToken"); // Consistently use authToken
   const [isAuthenticated, setIsAuthenticated] = useState(token ? true : false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken"); // authToken ni tekshirish
+    const token = localStorage.getItem("authToken"); // Ensure authToken is checked
     setIsAuthenticated(!!token);
   }, []);
 
   const handleLogin = (token) => {
     localStorage.setItem("authToken", token);
     setIsAuthenticated(true);
+    navigate("/"); // Redirect to the dashboard after login
   };
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setIsAuthenticated(false);
-    navigate("/login");
+    navigate("/login"); // Redirect to login page after logout
   };
 
   return (
@@ -39,6 +39,19 @@ function App() {
             isAuthenticated ? (
               <MainLayout handleLogout={handleLogout}>
                 <Dashboard onLogout={handleLogout} />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/addUser"
+          element={
+            isAuthenticated ? (
+              <MainLayout handleLogout={handleLogout}>
+                <AddUser onLogout={handleLogout} />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
@@ -82,14 +95,14 @@ function App() {
             )
           }
         />
-        {/* 11.12.2024 */}
+
         <Route
           path="/login"
           element={
             isAuthenticated ? (
               <Navigate to="/" replace />
             ) : (
-              <Login setIsAuthenticated={setIsAuthenticated} />
+              <Login setIsAuthenticated={handleLogin} />
             )
           }
         />

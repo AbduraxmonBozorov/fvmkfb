@@ -33,7 +33,7 @@ export default function Layout({ children, handleLogout }) {
             </Link>
           </li>
           <li>
-            <Link to="/users" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
+            <Link to="/addUser" className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2">
               <Users size={20} />
               <span>Xodim qo'shish</span>
             </Link>
