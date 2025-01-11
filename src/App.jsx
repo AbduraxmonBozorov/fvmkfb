@@ -7,14 +7,15 @@ import Login from "./pages/Login";
 import User1 from "./pages/User1";
 import Tasks from "./pages/Tasks";
 import AddUser from "./pages/rahbariyat/AddUser";
+import Settings from "./pages/Settings";
 
 function App() {
-  const token = localStorage.getItem("authToken"); // Consistently use authToken
+  const token = localStorage.getItem("authToken");
   const [isAuthenticated, setIsAuthenticated] = useState(token ? true : false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken"); // Ensure authToken is checked
+    const token = localStorage.getItem("authToken");
     setIsAuthenticated(!!token);
   }, []);
 
@@ -103,6 +104,19 @@ function App() {
               <Navigate to="/" replace />
             ) : (
               <Login setIsAuthenticated={handleLogin} />
+            )
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            isAuthenticated ? (
+              <MainLayout handleLogout={handleLogout}>
+                <Settings />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
             )
           }
         />
