@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import "./WorkExperienceTable.css";
 
-const WorkExperienceTable = () => {
-  // Jadval ma'lumotlarini saqlash uchun useState
-  const [rows, setRows] = useState([
-    { id: 1, period: "2020-2022", organization: "OpenAI", department: "Dasturiy bo'lim", position: "Dasturchi" },
-    { id: 2, period: "2022-2025", organization: "Google", department: "Sun'iy intellekt", position: "Bosh mutaxassis" },
-  ]);
-
+const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
   // Yangi qator qo'shadigan funksiya
   const addRow = () => {
     const newRow = {
-      id: rows.length + 1, // ID qatorlar soniga asoslanadi
+      id: workExperiences.length + 1, // ID qatorlar soniga asoslanadi
       period: "",
       organization: "",
       department: "",
       position: "",
     };
-    setRows([...rows, newRow]); // Eski ma'lumotlarga yangi qatorni qo'shish
+    setworkExperiences([...workExperiences, newRow]); // Eski ma'lumotlarga yangi qatorni qo'shish
+  };
+
+  // Ma'lumotni o'zgartirish funksiyasi
+  const handleInputChange = (index, field, value) => {
+    const updatedRows = [...workExperiences];
+    updatedRows[index][field] = value; // To'g'ri indeksni va maydonni yangilash
+    setworkExperiences(updatedRows);
   };
 
   return (
@@ -35,58 +36,52 @@ const WorkExperienceTable = () => {
         </thead>
         <tbody>
           {/* Har bir qatorni dinamik ravishda chiqarish */}
-          {rows.map((row, index) => (
-            <tr key={row.id}>
+          {workExperiences.map((work, index) => (
+            <tr key={work.id}>
               <td>{index + 1}</td>
               <td>
                 <input
                   type="text"
-                  value={row.period}
-                  onChange={(e) => {
-                    const updatedRows = [...rows];
-                    updatedRows[index].period = e.target.value;
-                    setRows(updatedRows);
-                  }}
+                  value={work.period}
+                  onChange={(e) =>
+                    handleInputChange(index, "period", e.target.value)
+                  }
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={row.organization}
-                  onChange={(e) => {
-                    const updatedRows = [...rows];
-                    updatedRows[index].organization = e.target.value;
-                    setRows(updatedRows);
-                  }}
+                  value={work.organization}
+                  onChange={(e) =>
+                    handleInputChange(index, "organization", e.target.value)
+                  }
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={row.department}
-                  onChange={(e) => {
-                    const updatedRows = [...rows];
-                    updatedRows[index].department = e.target.value;
-                    setRows(updatedRows);
-                  }}
+                  value={work.department}
+                  onChange={(e) =>
+                    handleInputChange(index, "department", e.target.value)
+                  }
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={row.position}
-                  onChange={(e) => {
-                    const updatedRows = [...rows];
-                    updatedRows[index].position = e.target.value;
-                    setRows(updatedRows);
-                  }}
+                  value={work.position}
+                  onChange={(e) =>
+                    handleInputChange(index, "position", e.target.value)
+                  }
                 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button type="button" className="add-row-btn" onClick={addRow}>+</button>
+      <button type="button" className="add-row-btn" onClick={addRow}>
+        +
+      </button>
     </div>
   );
 };
