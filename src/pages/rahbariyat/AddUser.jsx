@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import WorkExperienceTable from "../../components/workExperiance/WorkExperiance";
 import FamilyTable from "../../components/familyTable/FamilyTable";
 
 function AddUser() {
-  const [eduId, setEduId] = useState(1);
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const birthdayRef = useRef(null);
+  const addressRef = useRef(null);
+  const pictureRef = useRef(null);
+  const departmentRef = useRef(null);
+  const positionRef = useRef(null);
+  const phoneRef = useRef(null);
+  const eduNameRef = useRef(null);
+  const studyYearRef = useRef(null);
+  const degreeRef = useRef(null);
+  const specialtyRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [workExperiences, setworkExperiences] = useState([
     {
@@ -27,6 +39,7 @@ function AddUser() {
     fullname: "Abduraxmon Bozorov",
     email: "abduraxmon@gmail.com",
     birth_date: "2025-01-22",
+    address: '',
     picture: "",
     department: "AKT",
     position: "Bo'lim boshligi",
@@ -39,9 +52,7 @@ function AddUser() {
         specialty: "Computer Science",
       },
     ],
-    family:[
-      {}
-    ]
+    family: [{}],
   });
 
   const ind = 1;
@@ -79,6 +90,7 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
+                      ref={firstNameRef}
                         type="text"
                         name="first-name"
                         id="first-name"
@@ -98,6 +110,7 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
+                      ref={lastNameRef}
                         type="text"
                         name="last-name"
                         id="last-name"
@@ -117,6 +130,7 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
+                      ref={birthdayRef}
                         type="date"
                         name="birthday"
                         id="birthday"
@@ -136,6 +150,7 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
+                      ref={addressRef}
                         type="text"
                         name="address"
                         id="address"
@@ -161,6 +176,7 @@ function AddUser() {
                     </label>
                   )}
                   <input
+                  ref={pictureRef}
                     type="file"
                     accept="image/*"
                     className="w-full text-sm"
@@ -179,6 +195,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={departmentRef}
                     type="text"
                     name="department"
                     id="department"
@@ -198,6 +215,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={positionRef}
                     type="text"
                     name="position"
                     id="position"
@@ -219,6 +237,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={eduNameRef}
                     type="text"
                     name="edu-name"
                     id="edu-name"
@@ -238,6 +257,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                    ref={degreeRef}
                     type="text"
                     name="education"
                     id="education"
@@ -257,6 +277,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={studyYearRef}
                     type="text"
                     name="edu-period"
                     id="edu-period"
@@ -277,6 +298,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={specialtyRef}
                     type="text"
                     name="specialty"
                     id="specialty"
@@ -299,6 +321,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={phoneRef}
                     type="tel"
                     name="phone"
                     id="phone"
@@ -319,6 +342,7 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
+                  ref={emailRef}
                     type="email"
                     name="Email"
                     id="Email"
@@ -339,7 +363,10 @@ function AddUser() {
 
               {/* Family-info */}
               <div className="sm:col-span-6">
-                <FamilyTable familyMembers={setFamilyMembers} />
+                <FamilyTable
+                  familyMembers={familyMembers}
+                  setFamilyMembers={setFamilyMembers}
+                />
               </div>
             </div>
           </div>

@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./WorkExperienceTable.css";
 
 const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
+  const workPeriodRef = useRef(null);
+  const organizationNameRef = useRef(null);
+  const departmentRef = useRef(null);
+  const positionRef = useRef(null);
+
+
+  
   // Yangi qator qo'shadigan funksiya
   const addRow = () => {
     const newRow = {
@@ -41,6 +48,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               <td>{index + 1}</td>
               <td>
                 <input
+                  ref={workPeriodRef}
                   type="text"
                   value={work.period}
                   onChange={(e) =>
@@ -50,6 +58,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               </td>
               <td>
                 <input
+                  ref={organizationNameRef}
                   type="text"
                   value={work.organization}
                   onChange={(e) =>
@@ -59,6 +68,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               </td>
               <td>
                 <input
+                  ref={departmentRef}
                   type="text"
                   value={work.department}
                   onChange={(e) =>
@@ -68,6 +78,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               </td>
               <td>
                 <input
+                  ref={positionRef}
                   type="text"
                   value={work.position}
                   onChange={(e) =>

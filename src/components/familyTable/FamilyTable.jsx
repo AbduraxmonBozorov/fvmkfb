@@ -1,28 +1,11 @@
 import React, { useState } from "react";
 import "./FamilyTable.css"; // Stil faylini o'zgartirishingiz mumkin
 
-const FamilyTable = () => {
-  // Oila a'zolari uchun jadval ma'lumotlarini saqlash
-  const [familyMembers, setFamilyMembers] = useState([
-    {
-      id: 1,
-      family_member: "Dadasi",
-      name: "Ali Karimov",
-      birthDate: "1990-05-10",
-      address: "Toshkent",
-      job: "Dasturchi",
-      education: "Oliy",
-    },
-    {
-      id: 2,
-      family_member: "Onasi",
-      name: "Maya Karimova",
-      birthDate: "1995-08-15",
-      address: "Toshkent",
-      job: "Muallima",
-      education: "Oliy",
-    },
-  ]);
+const FamilyTable = ({familyMembers, setFamilyMembers}) => {
+  
+  console.log(familyMembers);
+  
+ 
 
   // Yangi qator qo'shish
   const addRow = () => {
