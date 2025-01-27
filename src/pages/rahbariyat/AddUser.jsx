@@ -3,20 +3,29 @@ import WorkExperienceTable from "../../components/workExperiance/WorkExperiance"
 import FamilyTable from "../../components/familyTable/FamilyTable";
 
 function AddUser() {
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const emailRef = useRef(null);
-  const birthdayRef = useRef(null);
-  const addressRef = useRef(null);
-  const pictureRef = useRef(null);
-  const departmentRef = useRef(null);
-  const positionRef = useRef(null);
-  const phoneRef = useRef(null);
-  const eduNameRef = useRef(null);
-  const studyYearRef = useRef(null);
-  const degreeRef = useRef(null);
-  const specialtyRef = useRef(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const [firstname, setFirstname] = useState("Abduraxmon");
+  const [lastname, setLastname] = useState("Bozorov");
+  const [birthday, setBirthday] = useState("");  
+  const [address, setAddress] = useState(
+    "Farg'ona viloyati Oltiariq tumani Jarqo'rg'ona MFY Qadriyat ko'chasi 6-uy"
+  );
+  const [imagePreview, setImagePreview] = useState("");
+  const [jobPlace, setJobPlace] = useState(
+    "Farg'ona vodiysi magistral kanallaridan foydalanish boshqarmasi"
+  );
+  const [department, setDepartment] = useState(
+    "Axborot kommunikatsiya texnologiyalari va raqamli texnologiyalarni rivojlantirish bo'limi"
+  );
+  const [position, setPosition] = useState("Bo'lim boshlig'i");
+  const [eduName, setEduName] = useState(
+    "Toshkent Axborot Texnologiyalari Universiteti"
+  );
+  const [education, setEducation] = useState("Oliy");
+  const [eduPeriod, setEduPeriod] = useState("2018-2022");
+  const [specialty, setSpecialty] = useState("Kompyuter injiner");
+  const [phone, setPhone] = useState("998905305053");
+  const [email, setEmail] = useState("abduraxmon@gmail.com");
+
   const [workExperiences, setworkExperiences] = useState([
     {
       id: 1,
@@ -35,32 +44,59 @@ function AddUser() {
   ]);
   const [familyMembers, setFamilyMembers] = useState([]);
 
-  const [newEmployee, setNewEmployee] = useState({
-    fullname: "Abduraxmon Bozorov",
-    email: "abduraxmon@gmail.com",
-    birth_date: "2025-01-22",
-    address: '',
-    picture: "",
-    department: "AKT",
-    position: "Bo'lim boshligi",
-    phone: "998905305053",
-    edu: [
-      {
-        edu_name: "XYZ University",
-        study_year: "2010-2014",
-        degree: "Bachelor",
-        specialty: "Computer Science",
-      },
-    ],
-    family: [{}],
-  });
 
-  const ind = 1;
 
-  const handleSubmit = (e) => {
+  
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // FormData obyektini yaratish
+    const formData = new FormData();
+    formData.append("fullname", `${firstname} ${lastname}`);
+    formData.append("email", email);
+    formData.append("birth_date", birthday);
+    formData.append("picture", imagePreview);
+    formData.append("department", department);
+    formData.append("position", position);
+    formData.append("phone", phone);
+  
+    // Ta'lim ma'lumotlarini qo'shish
+    formData.append(
+      "edu",
+      JSON.stringify([
+        {
+          edu_name: eduName,
+          study_year: eduPeriod,
+          degree: education,
+          specialty,
+        },
+      ])
+    );
+  
+    // Ish tajribasini qo'shish
+    formData.append("work_experiences", JSON.stringify(workExperiences));
+  
+    // Oila a'zolarni qo'shish
+    formData.append("family_members", JSON.stringify(familyMembers));
+  
+    try {
+      const response = await fetch(`/user/register`, {
+        method: "POST",
+        body: formData, // FormData ni to'g'ridan-to'g'ri yuborish
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Serverdan javob:", result);
+      } else {
+        console.error("Serverda xatolik:", response.status);
+      }
+    } catch (error) {
+      console.error("Xatolik yuz berdi:", error);
+    }
   };
 
+  // Rasm yuklash funksiyasi
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -90,7 +126,10 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
-                      ref={firstNameRef}
+                        value={firstname}
+                        onChange={(e) => {
+                          setFirstname(e.target.value);
+                        }}
                         type="text"
                         name="first-name"
                         id="first-name"
@@ -110,7 +149,10 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
-                      ref={lastNameRef}
+                        value={lastname}
+                        onChange={(e) => {
+                          setLastname(e.target.value);
+                        }}
                         type="text"
                         name="last-name"
                         id="last-name"
@@ -130,7 +172,9 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
-                      ref={birthdayRef}
+                        onChange={(e) => {
+                          setBirthday(e.target.value);
+                        }}
                         type="date"
                         name="birthday"
                         id="birthday"
@@ -150,7 +194,10 @@ function AddUser() {
                     </label>
                     <div className="mt-2">
                       <input
-                      ref={addressRef}
+                        value={address}
+                        onChange={(e) => {
+                          setAddress(e.target.value);
+                        }}
                         type="text"
                         name="address"
                         id="address"
@@ -176,11 +223,33 @@ function AddUser() {
                     </label>
                   )}
                   <input
-                  ref={pictureRef}
                     type="file"
                     accept="image/*"
                     className="w-full text-sm"
                     onChange={handleImageChange}
+                  />
+                </div>
+              </div>
+
+              {/* JobPlace */}
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="jobPlace"
+                  className="block text-sm/6 font-medium text-gray-900"
+                >
+                  Ish joyi
+                </label>
+                <div className="mt-2">
+                  <input
+                    value={jobPlace}
+                    onChange={(e) => {
+                      setJobPlace(e.target.value);
+                    }}
+                    type="text"
+                    name="jobPlace"
+                    id="jobPlace"
+                    autoComplete="jobPlace"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
               </div>
@@ -195,7 +264,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={departmentRef}
+                    value={department}
+                    onChange={(e) => {
+                      setDepartment(e.target.value);
+                    }}
                     type="text"
                     name="department"
                     id="department"
@@ -215,7 +287,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={positionRef}
+                    value={position}
+                    onChange={(e) => {
+                      setPosition(e.target.value);
+                    }}
                     type="text"
                     name="position"
                     id="position"
@@ -237,7 +312,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={eduNameRef}
+                    value={eduName}
+                    onChange={(e) => {
+                      setEduName(e.target.value);
+                    }}
                     type="text"
                     name="edu-name"
                     id="edu-name"
@@ -247,7 +325,7 @@ function AddUser() {
                 </div>
               </div>
 
-              {/* education */}
+              {/* Education */}
               <div className="sm:col-span-3">
                 <label
                   htmlFor="education"
@@ -257,7 +335,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                    ref={degreeRef}
+                    value={education}
+                    onChange={(e) => {
+                      setEducation(e.target.value);
+                    }}
                     type="text"
                     name="education"
                     id="education"
@@ -277,7 +358,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={studyYearRef}
+                    value={eduPeriod}
+                    onChange={(e) => {
+                      setEduPeriod(e.target.value);
+                    }}
                     type="text"
                     name="edu-period"
                     id="edu-period"
@@ -298,7 +382,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={specialtyRef}
+                    value={specialty}
+                    onChange={(e) => {
+                      setSpecialty(e.target.value);
+                    }}
                     type="text"
                     name="specialty"
                     id="specialty"
@@ -321,7 +408,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={phoneRef}
+                    value={phone}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
                     type="tel"
                     name="phone"
                     id="phone"
@@ -342,7 +432,10 @@ function AddUser() {
                 </label>
                 <div className="mt-2">
                   <input
-                  ref={emailRef}
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                     type="email"
                     name="Email"
                     id="Email"

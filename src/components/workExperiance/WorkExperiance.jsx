@@ -1,15 +1,8 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import "./WorkExperienceTable.css";
 
 const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
-  const workPeriodRef = useRef(null);
-  const organizationNameRef = useRef(null);
-  const departmentRef = useRef(null);
-  const positionRef = useRef(null);
-
-
-  
-  // Yangi qator qo'shadigan funksiya
+  // Yangi qator qo‘shish
   const addRow = () => {
     const newRow = {
       id: workExperiences.length + 1, // ID qatorlar soniga asoslanadi
@@ -18,13 +11,13 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
       department: "",
       position: "",
     };
-    setworkExperiences([...workExperiences, newRow]); // Eski ma'lumotlarga yangi qatorni qo'shish
+    setworkExperiences([...workExperiences, newRow]);
   };
 
-  // Ma'lumotni o'zgartirish funksiyasi
+  // Ma'lumotlarni o‘zgartirish funksiyasi
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...workExperiences];
-    updatedRows[index][field] = value; // To'g'ri indeksni va maydonni yangilash
+    updatedRows[index][field] = value;
     setworkExperiences(updatedRows);
   };
 
@@ -37,18 +30,16 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
             <th>№</th>
             <th>Ishlash davri</th>
             <th>Tashkilot nomi</th>
-            <th>Bo'lim</th>
+            <th>Bo‘lim</th>
             <th>Lavozimi</th>
           </tr>
         </thead>
         <tbody>
-          {/* Har bir qatorni dinamik ravishda chiqarish */}
           {workExperiences.map((work, index) => (
             <tr key={work.id}>
               <td>{index + 1}</td>
               <td>
                 <input
-                  ref={workPeriodRef}
                   type="text"
                   value={work.period}
                   onChange={(e) =>
@@ -58,7 +49,6 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               </td>
               <td>
                 <input
-                  ref={organizationNameRef}
                   type="text"
                   value={work.organization}
                   onChange={(e) =>
@@ -68,7 +58,6 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               </td>
               <td>
                 <input
-                  ref={departmentRef}
                   type="text"
                   value={work.department}
                   onChange={(e) =>
@@ -78,7 +67,6 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               </td>
               <td>
                 <input
-                  ref={positionRef}
                   type="text"
                   value={work.position}
                   onChange={(e) =>

@@ -1,13 +1,8 @@
-import React, { useState } from "react";
-import "./FamilyTable.css"; // Stil faylini o'zgartirishingiz mumkin
+import React from "react";
+import "./FamilyTable.css";
 
-const FamilyTable = ({familyMembers, setFamilyMembers}) => {
-  
-  console.log(familyMembers);
-  
- 
-
-  // Yangi qator qo'shish
+const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
+  // Yangi qator qo‘shish
   const addRow = () => {
     const newRow = {
       id: familyMembers.length + 1,
@@ -28,7 +23,7 @@ const FamilyTable = ({familyMembers, setFamilyMembers}) => {
     setFamilyMembers(updatedMembers);
   };
 
-  // Qatorni o'chirish
+  // Qatorni o‘chirish
   const deleteRow = (index) => {
     const updatedMembers = familyMembers.filter((_, i) => i !== index);
     setFamilyMembers(updatedMembers);
@@ -43,7 +38,7 @@ const FamilyTable = ({familyMembers, setFamilyMembers}) => {
             <th>№</th>
             <th>Oila A'zosi</th>
             <th>Ism-Familiya</th>
-            <th>Tu'g'ilgan Sana</th>
+            <th>Tug‘ilgan Sana</th>
             <th>Manzil</th>
             <th>Ish Joyi</th>
             <th>Ma'lumoti</th>
@@ -55,7 +50,6 @@ const FamilyTable = ({familyMembers, setFamilyMembers}) => {
             <tr key={member.id}>
               <td>{index + 1}</td>
               <td>
-                {/* Oila a'zosi nomini dinamik ravishda ko'rsatish */}
                 <input
                   type="text"
                   value={member.family_member}
