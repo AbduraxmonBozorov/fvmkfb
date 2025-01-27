@@ -9,6 +9,8 @@ const Login = ({ setIsAuthenticated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+    
     try {
       const response = await axios.post("/user/login", formData, {
         headers: {

@@ -5,6 +5,7 @@ import FamilyTable from "../../components/familyTable/FamilyTable";
 function AddUser() {
   const [firstname, setFirstname] = useState("Abduraxmon");
   const [lastname, setLastname] = useState("Bozorov");
+  const [role, setRole] = useState("xodim");
   const [birthday, setBirthday] = useState("");  
   const [address, setAddress] = useState(
     "Farg'ona viloyati Oltiariq tumani Jarqo'rg'ona MFY Qadriyat ko'chasi 6-uy"
@@ -43,6 +44,8 @@ function AddUser() {
     },
   ]);
   const [familyMembers, setFamilyMembers] = useState([]);
+  
+
 
 
 
@@ -50,50 +53,51 @@ function AddUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // FormData obyektini yaratish
-    const formData = new FormData();
-    formData.append("fullname", `${firstname} ${lastname}`);
-    formData.append("email", email);
-    formData.append("birth_date", birthday);
-    formData.append("picture", imagePreview);
-    formData.append("department", department);
-    formData.append("position", position);
-    formData.append("phone", phone);
-  
-    // Ta'lim ma'lumotlarini qo'shish
-    formData.append(
-      "edu",
-      JSON.stringify([
-        {
-          edu_name: eduName,
-          study_year: eduPeriod,
-          degree: education,
-          specialty,
-        },
-      ])
-    );
-  
-    // Ish tajribasini qo'shish
-    formData.append("work_experiences", JSON.stringify(workExperiences));
-  
-    // Oila a'zolarni qo'shish
-    formData.append("family_members", JSON.stringify(familyMembers));
-  
-    try {
-      const response = await fetch(`/user/register`, {
-        method: "POST",
-        body: formData, // FormData ni to'g'ridan-to'g'ri yuborish
-      });
-  
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Serverdan javob:", result);
-      } else {
-        console.error("Serverda xatolik:", response.status);
-      }
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
+
+    const newEmployee={
+      fullname: `${firstname} ${lastname}`,
+      email: email,
+      role,
+      birth_date: birthday,
+      department,
+      position,
+      phone,
+      edu: {
+        edu_name: eduName,
+        study_year: eduPeriod,
+        degree: education,
+        specialty
+      },
+      family: {
+        family_member: familyMembers.family_member,
+        family_fullname: familyMembers.name,
+        born_year: familyMembers.birthDate,
+        degree: familyMembers.education,
+        address: familyMembers.address,
+        job_address: familyMembers.job
+      },
+      
     }
+
+    console.log(newEmployee);
+    
+   
+    
+    // try {
+    //   const response = await fetch(`/user/register`, {
+    //     method: "POST",
+    //     body: formData, // FormData ni to'g'ridan-to'g'ri yuborish
+    //   });
+  
+    //   if (response.ok) {
+    //     const result = await response.json();
+    //     console.log("Serverdan javob:", result);
+    //   } else {
+    //     console.error("Serverda xatolik:", response.status);
+    //   }
+    // } catch (error) {
+    //   console.error("Xatolik yuz berdi:", error);
+    // }
   };
 
   // Rasm yuklash funksiyasi
