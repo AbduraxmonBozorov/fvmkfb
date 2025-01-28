@@ -68,14 +68,7 @@ function AddUser() {
         degree: education,
         specialty
       },
-      family: {
-        family_member: familyMembers.family_member,
-        family_fullname: familyMembers.name,
-        born_year: familyMembers.birthDate,
-        degree: familyMembers.education,
-        address: familyMembers.address,
-        job_address: familyMembers.job
-      },
+      family: familyMembers
       
     }
 
