@@ -53,7 +53,7 @@ function AddUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const newEmployee={
       fullname: `${firstname} ${lastname}`,
       email: email,
@@ -76,21 +76,21 @@ function AddUser() {
     
    
     
-    // try {
-    //   const response = await fetch(`/user/register`, {
-    //     method: "POST",
-    //     body: formData, // FormData ni to'g'ridan-to'g'ri yuborish
-    //   });
+    try {
+      const response = await fetch(`/user/register`, {
+        method: "POST",
+        body: JSON.stringify(newEmployee),
+      });
   
-    //   if (response.ok) {
-    //     const result = await response.json();
-    //     console.log("Serverdan javob:", result);
-    //   } else {
-    //     console.error("Serverda xatolik:", response.status);
-    //   }
-    // } catch (error) {
-    //   console.error("Xatolik yuz berdi:", error);
-    // }
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Serverdan javob:", result);
+      } else {
+        console.error("Serverda xatolik:", response.status);
+      }
+    } catch (error) {
+      console.error("Xatolik yuz berdi:", error);
+    }
   };
 
   // Rasm yuklash funksiyasi

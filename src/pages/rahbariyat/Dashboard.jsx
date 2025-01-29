@@ -39,6 +39,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [employees, setEmployees] = useState([])
+  const [oliy, setOliy] = useState(0);
+  const [ortaMaxsus, setOrtaMaxsus] = useState(0);
 
   useEffect(()=>{
     fetch('/api/user?page=1&limit=12')
@@ -48,6 +50,10 @@ export default function Dashboard() {
     })    
     .catch((error) => console.error(error));
   }, []);
+
+  useEffect(()=>{
+    console.log(employees);
+  }, [employees])
   
   
 
@@ -76,13 +82,13 @@ export default function Dashboard() {
         <StatCard
           icon={GraduationCap}
           title="Oliy ma'lumotli"
-          value={100}
+          value={oliy}
           color="text-green-600"
         />
         <StatCard
           icon={BookOpen}
           title="O'rta maxsus"
-          value={50}
+          value={ortaMaxsus}
           color="text-yellow-600"
         />
         <button
