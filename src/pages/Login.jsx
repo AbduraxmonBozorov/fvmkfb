@@ -23,7 +23,6 @@ const Login = ({ setIsAuthenticated }) => {
         localStorage.setItem("authToken", response.data.token); // token nomini bir xil qiling
         setIsAuthenticated(true); // Auth holatini yangilang
         navigate("/");
-        console.log(response);
         
       }
     } catch (err) {

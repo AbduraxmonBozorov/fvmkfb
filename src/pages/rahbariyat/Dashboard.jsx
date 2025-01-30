@@ -3,17 +3,6 @@ import { Users, GraduationCap, BookOpen, UserPlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2,
-    },
-  },
-};
-
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -37,7 +26,6 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [employees, setEmployees] = useState([])
   const [oliy, setOliy] = useState(0);
   const [ortaMaxsus, setOrtaMaxsus] = useState(0);
@@ -54,13 +42,6 @@ export default function Dashboard() {
   useEffect(()=>{
     console.log(employees);
   }, [employees])
-  
-  
-
-  const addEmployee = (newEmployee) => {
-    setEmployees([...employees, { id: employees.length + 1, ...newEmployee }]);
-    setIsModalOpen(false);
-  };
   
 
   function handleUser(id) {
@@ -92,7 +73,7 @@ export default function Dashboard() {
           color="text-yellow-600"
         />
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={()=>{navigate("/addUser")}}
           className="bg-white rounded-lg shadow-md p-6 flex items-center justify-center space-x-4 text-purple-600 hover:bg-purple-50 transition duration-300"
         >
           <UserPlus size={40} />
@@ -153,155 +134,8 @@ export default function Dashboard() {
         </section>
       </div>
       <Pagination currentPage={1} totalPages={5} />
-      {isModalOpen && (
-        <NewEmployeeModal
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={addEmployee}
-        />
-      )}
+      
     </div>
   );
 }
 
-function NewEmployeeModal({ onClose, onSubmit }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    password: "",
-    department: "",
-    position: "",
-    education: "",
-    grade: "",
-    stardivate: "",
-    image: null,
-  });
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Formani default submit qilmaslik uchun
-    onSubmit(formData); // Modalni yopish va hodimni qo'shish
-  };
-
-  return (
-    <div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
-    >
-      <div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 space-y-4"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          Yangi hodim qo'shish
-        </h2>
-
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Ism"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-          <input
-            type="text"
-            name="surname"
-            placeholder="Familiya"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Parol"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-
-          <input
-            type="text"
-            name="department"
-            placeholder="Bo'lim"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-          <input
-            type="text"
-            name="position"
-            placeholder="Lavozim"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-
-          <input
-            type="text"
-            name="education"
-            placeholder="Ma'lumoti"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-          <input
-            type="text"
-            name="grade"
-            placeholder="Razryadi"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-
-          <input
-            type="date"
-            name="stardivate"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-          <input
-            type="file"
-            name="image"
-            onChange={handleChange}
-            className="input input-bordered w-full"
-          />
-
-          <div className="col-span-1 md:col-span-2 flex justify-between mt-4">
-            <button type="submit" className="btn btn-primary">
-              Qo'shish
-            </button>
-            <button type="button" onClick={onClose} className="btn btn-error">
-              Yopish
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}

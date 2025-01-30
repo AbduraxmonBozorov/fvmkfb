@@ -107,6 +107,7 @@ function AddUser() {
 
   return (
     <div>
+      <h1 className="font-semibold text-2xl ">Yangi xodim ma'lumotlarini kiriting</h1>
       <form onSubmit={handleSubmit}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import MainLayout from "./mainLayout/MainLayout";
 import Dashboard from "./pages/rahbariyat/Dashboard";
-import Register from "./pages/Register";
 import Login from "./pages/Login";
 import User1 from "./pages/User1";
 import Tasks from "./pages/Tasks";
 import AddUser from "./pages/rahbariyat/AddUser";
 import Settings from "./pages/Settings";
+import Davomat from "./pages/rahbariyat/Davomat";
 
 function App() {
   const token = localStorage.getItem("authToken");
@@ -34,6 +34,7 @@ function App() {
   return (
     <div>
       <Routes>
+        {/* Dashboard */}
         <Route
           path="/"
           element={
@@ -47,6 +48,21 @@ function App() {
           }
         />
 
+        {/* Davomat */}
+        <Route
+          path="/davomat"
+          element={
+            isAuthenticated ? (
+              <MainLayout handleLogout={handleLogout}>
+                <Davomat onLogout={handleLogout} />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Add User */}
         <Route
           path="/addUser"
           element={
@@ -60,6 +76,7 @@ function App() {
           }
         />
 
+        {/* Tasks */}
         <Route
           path="/tasks"
           element={
@@ -72,7 +89,8 @@ function App() {
             )
           }
         />
-
+        
+        {/* User info */}
         <Route
           path="/user/:id"
           element={
@@ -85,18 +103,8 @@ function App() {
             )
           }
         />
-
-        <Route
-          path="/register"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/" replace />
-            ) : (
-              <Register setIsAuthenticated={handleLogin} />
-            )
-          }
-        />
-
+        
+        {/* Login */}
         <Route
           path="/login"
           element={
