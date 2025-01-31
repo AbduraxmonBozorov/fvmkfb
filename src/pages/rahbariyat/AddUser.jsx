@@ -6,7 +6,7 @@ function AddUser() {
   const [firstname, setFirstname] = useState("Abduraxmon");
   const [lastname, setLastname] = useState("Bozorov");
   const [role, setRole] = useState("xodim");
-  const [birthday, setBirthday] = useState("");  
+  const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState(
     "Farg'ona viloyati Oltiariq tumani Jarqo'rg'ona MFY Qadriyat ko'chasi 6-uy"
   );
@@ -44,17 +44,11 @@ function AddUser() {
     },
   ]);
   const [familyMembers, setFamilyMembers] = useState([]);
-  
-
-
-
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const newEmployee={
+
+    const newEmployee = {
       fullname: `${firstname} ${lastname}`,
       email: email,
       role,
@@ -62,26 +56,25 @@ function AddUser() {
       department,
       position,
       phone,
-      edu: {
-        edu_name: eduName,
-        study_year: eduPeriod,
-        degree: education,
-        specialty
-      },
-      family: familyMembers
-      
-    }
+      edu: [
+        {
+          edu_name: eduName,
+          study_year: eduPeriod,
+          degree: education,
+          specialty,
+        },
+      ],
+      family: familyMembers,
+    };
 
-    console.log(newEmployee);
-    
-   
-    
+     // console.log(familyMembers);
+
     try {
       const response = await fetch(`/user/register`, {
         method: "POST",
         body: JSON.stringify(newEmployee),
       });
-  
+
       if (response.ok) {
         const result = await response.json();
         console.log("Serverdan javob:", result);
@@ -107,7 +100,9 @@ function AddUser() {
 
   return (
     <div>
-      <h1 className="font-semibold text-2xl ">Yangi xodim ma'lumotlarini kiriting</h1>
+      <h1 className="font-semibold text-2xl ">
+        Yangi xodim ma'lumotlarini kiriting
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
@@ -483,3 +478,64 @@ function AddUser() {
 }
 
 export default AddUser;
+
+
+
+// 
+
+// const yangiXodim={
+//   fullName: "Abduraxmon Bozorov", 
+//   birthday: "1999-05-15",
+//   address: "Farg'ona viloyati Oltiariq tumani",
+//   userPicture: "",
+//   edu: [
+//     {
+//       eduName: "TATU",
+//       eduPeriod: "2018-2022",
+//       degree: "oliy",
+//       specialty: "muhandis"
+//     },
+//     {
+//       eduName: "FarPI",
+//       eduPeriod: "2018-2022",
+//       degree: "oliy",
+//       specialty: "muhandis"
+//     },
+//   ],
+//   phone: "998905305053",
+//   email: "abduraxmon@gmail.com",
+//   workExperiance: [
+//     {
+//       jobYear: "2015-2020",
+//       organizationName: "vehivgbweriv",
+//       department: "AKT",
+//       position: "mutaxasis"
+
+//     },
+//     {
+//       jobYear: "2015-2020",
+//       organizationName: "vehivgbweriv",
+//       department: "AKT",
+//       position: "mutaxasis"
+
+//     },
+//     {
+//       jobYear: "2015-2020",
+//       organizationName: "vehivgbweriv",
+//       department: "AKT",
+//       position: "mutaxasis"
+
+//     },
+//   ],
+//   familyMembers:[
+//     {
+//       familyMember: "Otasi",
+//       fullName: "Abdumutalib Bozorov",
+//       birthday: "1974-04-25",
+//       address: "fehgertherthert",
+//       workPlace: "gethwerghwerghw",
+//       degree: "oliy"
+//     }
+//   ]
+
+// }

@@ -8,9 +8,7 @@ const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
-    
+    e.preventDefault();    
     try {
       const response = await axios.post("/user/login", formData, {
         headers: {

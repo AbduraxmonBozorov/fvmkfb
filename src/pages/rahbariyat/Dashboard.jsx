@@ -40,7 +40,7 @@ export default function Dashboard() {
   }, []);
 
   useEffect(()=>{
-    console.log(employees);
+    // console.log(employees);
   }, [employees])
   
 
