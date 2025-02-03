@@ -26,27 +26,21 @@ function AddUser() {
   const [specialty, setSpecialty] = useState("Kompyuter injiner");
   const [phone, setPhone] = useState("998905305053");
   const [email, setEmail] = useState("abduraxmon@gmail.com");
-
-  const [workExperiences, setworkExperiences] = useState([
-    {
-      id: 1,
-      period: "2020-2022",
-      organization: "OpenAI",
-      department: "Dasturiy bo'lim",
-      position: "Dasturchi",
-    },
-    {
-      id: 2,
-      period: "2022-2025",
-      organization: "Google",
-      department: "Sun'iy intellekt",
-      position: "Bosh mutaxassis",
-    },
-  ]);
+  const [workExperiences, setworkExperiences] = useState([]);
   const [familyMembers, setFamilyMembers] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newJob = {
+      id: workExperiences.length + 1, // ID qatorlar soniga asoslanadi
+      period: `${new Date().getFullYear()} - now`,
+      organization: jobPlace,
+      department,
+      position,
+    };
+
+    let workExperiences1 = [...workExperiences, newJob];
 
     const newEmployee = {
       fullname: `${firstname} ${lastname}`,
@@ -65,9 +59,8 @@ function AddUser() {
         },
       ],
       family: familyMembers,
+      workExperiences: workExperiences1,
     };
-
-     // console.log(familyMembers);
 
     try {
       const response = await fetch(`/user/register`, {
@@ -479,12 +472,10 @@ function AddUser() {
 
 export default AddUser;
 
-
-
-// 
+//
 
 // const yangiXodim={
-//   fullName: "Abduraxmon Bozorov", 
+//   fullName: "Abduraxmon Bozorov",
 //   birthday: "1999-05-15",
 //   address: "Farg'ona viloyati Oltiariq tumani",
 //   userPicture: "",

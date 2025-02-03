@@ -45,6 +45,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
                   onChange={(e) =>
                     handleInputChange(index, "period", e.target.value)
                   }
+                  placeholder="2015-2020"
                 />
               </td>
               <td>
@@ -54,6 +55,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
                   onChange={(e) =>
                     handleInputChange(index, "organization", e.target.value)
                   }
+                  placeholder="Fargo'na vodiysi magistral kanallar boshqarmasi"
                 />
               </td>
               <td>
@@ -63,6 +65,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
                   onChange={(e) =>
                     handleInputChange(index, "department", e.target.value)
                   }
+                  placeholder="AKT"
                 />
               </td>
               <td>
@@ -72,6 +75,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
                   onChange={(e) =>
                     handleInputChange(index, "position", e.target.value)
                   }
+                  placeholder="Bosh mutaxasis"
                 />
               </td>
             </tr>

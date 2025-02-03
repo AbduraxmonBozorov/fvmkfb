@@ -54,6 +54,7 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
                   type="text"
                   value={member.family_member}
                   onChange={(e) => handleInputChange(e, index, "family_member")}
+                  placeholder="Otasi"
                 />
               </td>
               <td>
@@ -61,6 +62,7 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
                   type="text"
                   value={member.name}
                   onChange={(e) => handleInputChange(e, index, "name")}
+                  placeholder="Kamolov Alisher"
                 />
               </td>
               <td>
