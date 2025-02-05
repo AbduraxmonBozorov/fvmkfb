@@ -7,6 +7,7 @@ const Login = ({ setIsAuthenticated }) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();    
     try {
@@ -21,6 +22,8 @@ const Login = ({ setIsAuthenticated }) => {
         localStorage.setItem("authToken", response.data.token); // token nomini bir xil qiling
         setIsAuthenticated(true); // Auth holatini yangilang
         navigate("/");
+        console.log(response);
+        localStorage.setItem("token", response.data.token);
         
       }
     } catch (err) {

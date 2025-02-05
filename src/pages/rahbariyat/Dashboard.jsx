@@ -29,6 +29,7 @@ export default function Dashboard() {
   const [employees, setEmployees] = useState([])
   const [oliy, setOliy] = useState(0);
   const [ortaMaxsus, setOrtaMaxsus] = useState(0);
+  const [user, setUser] = useState();
 
   useEffect(()=>{
     fetch('/api/user?page=1&limit=12')
@@ -37,6 +38,15 @@ export default function Dashboard() {
       setEmployees(data.users)
     })    
     .catch((error) => console.error(error));
+
+    fetch(`/user/me/profile`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then(resp =>resp.json())
+    .then(data => localStorage.setItem("user", JSON.stringify(data)))
+
   }, []);
 
   useEffect(()=>{

@@ -49,6 +49,8 @@ function AddUser() {
       birth_date: birthday,
       department,
       position,
+      picture: imagePreview,
+      address: address,
       phone,
       edu: [
         {

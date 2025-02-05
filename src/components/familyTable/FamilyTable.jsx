@@ -7,7 +7,7 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
     const newRow = {
       id: familyMembers.length + 1,
       family_member: "",
-      name: "",
+      fullname: "",
       birthDate: "",
       address: "",
       job: "",
@@ -60,8 +60,8 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
               <td>
                 <input
                   type="text"
-                  value={member.name}
-                  onChange={(e) => handleInputChange(e, index, "name")}
+                  value={member.fullame}
+                  onChange={(e) => handleInputChange(e, index, "fullname")}
                   placeholder="Kamolov Alisher"
                 />
               </td>
