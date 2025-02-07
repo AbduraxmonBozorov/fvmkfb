@@ -8,10 +8,10 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
       id: familyMembers.length + 1,
       family_member: "",
       fullname: "",
-      birthDate: "",
+      birth_data: "",
       address: "",
-      job: "",
-      education: "",
+      job_address: "",
+      grade: "",
     };
     setFamilyMembers([...familyMembers, newRow]);
   };
@@ -60,7 +60,7 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
               <td>
                 <input
                   type="text"
-                  value={member.fullame}
+                  value={member.fullname}
                   onChange={(e) => handleInputChange(e, index, "fullname")}
                   placeholder="Kamolov Alisher"
                 />
@@ -68,8 +68,8 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
               <td>
                 <input
                   type="date"
-                  value={member.birthDate}
-                  onChange={(e) => handleInputChange(e, index, "birthDate")}
+                  value={member.birth_data}
+                  onChange={(e) => handleInputChange(e, index, "birth_data")}
                 />
               </td>
               <td>
@@ -82,15 +82,15 @@ const FamilyTable = ({ familyMembers, setFamilyMembers }) => {
               <td>
                 <input
                   type="text"
-                  value={member.job}
-                  onChange={(e) => handleInputChange(e, index, "job")}
+                  value={member.job_address}
+                  onChange={(e) => handleInputChange(e, index, "job_address")}
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={member.education}
-                  onChange={(e) => handleInputChange(e, index, "education")}
+                  value={member.grade}
+                  onChange={(e) => handleInputChange(e, index, "grade")}
                 />
               </td>
               <td>

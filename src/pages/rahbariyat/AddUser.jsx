@@ -6,7 +6,7 @@ function AddUser() {
   const [firstname, setFirstname] = useState("Abduraxmon");
   const [lastname, setLastname] = useState("Bozorov");
   const [role, setRole] = useState("xodim");
-  const [birthday, setBirthday] = useState("");
+  const [birth_date, setBirth_Date] = useState("");
   const [address, setAddress] = useState(
     "Farg'ona viloyati Oltiariq tumani Jarqo'rg'ona MFY Qadriyat ko'chasi 6-uy"
   );
@@ -46,7 +46,7 @@ function AddUser() {
       fullname: `${firstname} ${lastname}`,
       email: email,
       role,
-      birth_date: birthday,
+      birth_date: birth_date,
       department,
       position,
       picture: imagePreview,
@@ -60,14 +60,34 @@ function AddUser() {
           specialty,
         },
       ],
-      family: familyMembers,
+      familyMembers: familyMembers,
       workExperiences: workExperiences1,
     };
 
+    const formData = new FormData();
+    formData.append("fullname", newEmployee.fullname);
+    formData.append("email", email);
+    formData.append("role", role);
+    formData.append("birth_date", birth_date);
+    formData.append("department", department);
+    formData.append("position", position);
+    formData.append("picture", newEmployee.picture);
+    formData.append("address", address);
+    formData.append("phone", phone);
+    formData.append("edu", JSON.stringify(newEmployee.edu));
+    formData.append("familyMembers", JSON.stringify(familyMembers));
+    formData.append("workExperiences", JSON.stringify(workExperiences1));
+    const arr=[formData]
+
+    const arr1=[newEmployee]
+    
+    
+
+    
     try {
-      const response = await fetch(`/user/register`, {
+      const response = await fetch(`/user/register`, {       
         method: "POST",
-        body: JSON.stringify(newEmployee),
+        body: formData,
       });
 
       if (response.ok) {
@@ -150,10 +170,10 @@ function AddUser() {
                     </div>
                   </div>
 
-                  {/* Birthday */}
+                  {/* birth_date */}
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="birthday"
+                      htmlFor="birth_date"
                       className="block text-sm/6 font-medium text-gray-900"
                     >
                       Tug'ilgan sanasi
@@ -161,12 +181,12 @@ function AddUser() {
                     <div className="mt-2">
                       <input
                         onChange={(e) => {
-                          setBirthday(e.target.value);
+                          setBirth_Date(e.target.value);
                         }}
                         type="date"
-                        name="birthday"
-                        id="birthday"
-                        autoComplete="birthday"
+                        name="birth_date"
+                        id="birth_date"
+                        autoComplete="birth_date"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
@@ -478,7 +498,7 @@ export default AddUser;
 
 // const yangiXodim={
 //   fullName: "Abduraxmon Bozorov",
-//   birthday: "1999-05-15",
+//   birth_date: "1999-05-15",
 //   address: "Farg'ona viloyati Oltiariq tumani",
 //   userPicture: "",
 //   edu: [
@@ -524,7 +544,7 @@ export default AddUser;
 //     {
 //       familyMember: "Otasi",
 //       fullName: "Abdumutalib Bozorov",
-//       birthday: "1974-04-25",
+//       birth_date: "1974-04-25",
 //       address: "fehgertherthert",
 //       workPlace: "gethwerghwerghw",
 //       degree: "oliy"
