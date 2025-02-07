@@ -10,14 +10,11 @@ import Settings from "./pages/Settings";
 import Davomat from "./pages/rahbariyat/Davomat";
 
 function App() {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("token") ? localStorage.getItem("token") : "";
   const [isAuthenticated, setIsAuthenticated] = useState(token ? true : false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    setIsAuthenticated(!!token);
-  }, []);
+  
+  
 
   const handleLogin = (token) => {
     localStorage.setItem("authToken", token);
@@ -27,6 +24,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("token");
     setIsAuthenticated(false);
     navigate("/login"); // Redirect to login page after logout
   };

@@ -19,12 +19,8 @@ const Login = ({ setIsAuthenticated }) => {
       });
 
       if (response.status == 200) {
-        localStorage.setItem("authToken", response.data.token); // token nomini bir xil qiling
-        setIsAuthenticated(true); // Auth holatini yangilang
+        await  localStorage.setItem("token", response.data.token);
         navigate("/");
-        console.log(response);
-        localStorage.setItem("token", response.data.token);
-        
       }
     } catch (err) {
       console.error("Xato:", err.message);
