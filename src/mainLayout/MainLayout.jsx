@@ -12,7 +12,7 @@ export default function Layout({ children, handleLogout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  console.log(user);
+  // console.log(user);
   
 
   
