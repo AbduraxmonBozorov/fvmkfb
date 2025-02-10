@@ -21,7 +21,7 @@ const Login = () => {
       if (response.status == 200) {
         await  localStorage.setItem("token", response.data.token);
         localStorage.removeItem("apiMessage")
-        localStorage.setItem("apiMessage", response.data.message)
+        await localStorage.setItem("apiMessage", response.data.message)
         navigate("/");
 
         

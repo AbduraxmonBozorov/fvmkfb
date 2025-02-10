@@ -77,8 +77,8 @@ export default function Layout({ children, handleLogout }) {
               </svg>
             </button>
             <div className="flex items-center space-x-4">
-              <span className="text-gray-700">{user.fullname}</span>
-              <img className="w-8 h-8 rounded-full object-cover" src={user.picture} alt="Admin" />
+              <span className="text-gray-700">{user?.fullname}</span>
+              <img className="w-8 h-8 rounded-full object-cover" src={user?.picture} alt="Admin" />
             </div>
           </div>
         </header>
