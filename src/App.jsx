@@ -15,6 +15,7 @@ function App() {
   const navigate = useNavigate();
   
   
+  
 
   const handleLogin = (token) => {
     localStorage.setItem("authToken", token);
@@ -25,6 +26,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setIsAuthenticated(false);
     navigate("/login"); // Redirect to login page after logout
   };
