@@ -28,8 +28,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([])
   const [oliy, setOliy] = useState(0);
-  const [ortaMaxsus, setOrtaMaxsus] = useState(0);
-  const [user, setUser] = useState();
+  const [ortaMaxsus, setOrtaMaxsus] = useState(0);  
 
   useEffect(()=>{
     fetch('/api/user?page=1&limit=12')
@@ -45,13 +44,10 @@ export default function Dashboard() {
       }
     })
     .then(resp =>resp.json())
-    .then(data => localStorage.setItem("user", JSON.stringify(data)))
-
+    .then(data => {
+      localStorage.setItem("user", JSON.stringify(data))
+    })
   }, []);
-
-  useEffect(()=>{
-    // console.log(employees);
-  }, [employees])
   
 
   function handleUser(id) {
@@ -63,6 +59,7 @@ export default function Dashboard() {
       <h2 className="text-3xl font-bold text-gray-800">
         Hodimlar statistikasi
       </h2>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           icon={Users}
@@ -95,7 +92,6 @@ export default function Dashboard() {
         <h3 className="text-xl font-semibold rounded-lg p-4 bg-gray-50">
           Hodimlar ro'yxati
         </h3>
-
         <section className=" user-table w-full">
           <div className="thead flex flex-row justify-between align-middle bg-gray-50">
             <h2 className="w-full py-2 px-3 text-xl font-semibold">F.I.SH</h2>
@@ -130,7 +126,7 @@ export default function Dashboard() {
                     {employee.education}
                   </h2>
                   <h2 className="w-full py-2 px-3 text-xl">
-                    {employee.entity ? employee.entity : "BDM"}
+                    {employee.entity ? employee.entity : ""}
                   </h2> 
                   <h2 className="w-full py-2 px-3 text-xl">
                     {employee.grade}

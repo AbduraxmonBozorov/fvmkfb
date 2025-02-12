@@ -6,22 +6,62 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 function User1() {
   const [user, setUser] = useState({});
+  // const [userData, setUserData] = useState({});
+
+  console.log(user);
+
   const userId = useLocation().pathname.split("/user/")[1];
-  console.log(userId);
+
   useEffect(() => {
-    if(userId){
+    if (userId) {
       fetch(`/api/user/${userId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUser({})
-        setUser(data);
-      })
-      .catch((error) => console.error(error));
+        .then((response) => response.json())
+        .then((data) => {
+          setUser({});
+          setUser(data);
+        })
+        .catch((error) => console.error(error));
     }
   }, [userId]);
 
+  const formatPhoneNumber = (phone) => {
+    if (!phone) return "Telefon raqam mavjud emas"; // Undefined bo'lsa xatolik bermasligi uchun
+    return phone.replace(
+      /(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/,
+      "+$1 ($2) $3-$4-$5"
+    );
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "Tug'ilgan sana mavjud emas"; // Xatolik oldini olish
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0]; // "1990-01-01" formatida qaytaradi
+  };
+
+  // useEffect(() => {
+  //   fetch(`/user/me/profile`, {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   })
+  //     .then((data) => data.json())
+  //     .then((response) => {
+  //       {
+  //         setUserData(response);
+  //       }
+  //     })
+  //     .catch((error) => console.error("Error:", error));
+  // }, [userId]);
+
+  const personalInfo = {
+    fullName: "Kamolov Alisher Akmalovich",
+    birthDate: "15.08.1984",
+    address:
+      "Farg'ona viloyati Farg'ona shahar Mustaqillik MFY Alisher Navoiy ko'chasi 15-uy",
+  };
+
   return (
-    <div className="w-full h-full overflow-y-auto bg-slate-100 p-3 md:p-10">
+    <div className="w-full h-full overflow-y-auto bg-slate-100 p-3 md:p-3">
       <Link
         to="/"
         className="hover:text-sky-700 border rounded-lg bg-gray-200 px-2 py-3"
@@ -31,36 +71,64 @@ function User1() {
       </Link>
 
       <div className="about-user mt-3">
-        <div className="fish flex flex-row justify-between">
-          <div>
-            <h2 className="text-5xl font-medium">
-              {user.fullname ? user.fullname.split(" ")[1] : "Ism"}
-            </h2>
-            <h2 className="text-5xl font-medium">
-              {user.fullname ? user.fullname.split(" ")[0] : "Familiya"}
-            </h2>
+        <div>
+          <h1 className="text-2xl font-bold mb-6">Umumiy ma'lumotlar</h1>
+        </div>
+
+        {/* New Personal Information Section */}
+        <div className="mt-6 bg-white rounded-lg p-6 shadow-sm flex justify-between">
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <label className="text-gray-600 text-1xl">F.I.SH</label>
+              <div>
+                <h2 className="font-medium text-1xl">
+                  {user.fullname ? user.fullname.split(" ")[1] : "Ism"}
+                </h2>
+                <h2 className="font-medium text-1xl">
+                  {user.fullname ? user.fullname.split(" ")[0] : "Familiya"}
+                </h2>
+              </div>
+            </div>
+            <div>
+              <label className="text-gray-600 text-1xl">Tug'ilgan sana:</label>
+              <div className="font-medium text-1xl">
+                {formatDate(user?.birth_date)}
+              </div>
+            </div>
+            <div>
+              <label className="text-gray-600 text-1xl">Bo'lim:</label>
+              <div className="font-medium text-1xl">{user?.department}</div>
+            </div>
+            <div>
+              <label className="text-gray-600 text-1xl">Lavozim:</label>
+              <div className="font-medium text-1xl">{user?.position}</div>
+            </div>
+            <div>
+              <label className="text-gray-600 text-1xl">Manzili:</label>
+              <div className="font-medium text-1xl">{personalInfo.address}</div>
+            </div>
+            <div>
+              <label className="text-gray-600 text-1xl">Email:</label>
+              <div className="font-medium text-1xl">{user.email}</div>
+            </div>
+            <div>
+              <label className="text-gray-600 text-1xl">TelefonRaqam:</label>
+              <div className="font-medium text-1xl">
+                {formatPhoneNumber(user?.phone)}
+              </div>
+            </div>
           </div>
-          <div className="user-image w-32 h-32 border rounded-full">
+          <div className="">
             <img
-              src={user.picture ? user.picture : userImage}
-              className="w-full object-cover"
-              alt=""
+              src={"https://picsum.photos/200"}
+              className="border w-[200px] h-[240px] rounded-2xl object-cover"
+              alt={"xatolik"}
             />
           </div>
         </div>
-        <div className="about-work">
-          <h2 className="text-2xl">
-            Bo'lim:{" "}
-            <span>{user.department ? user.department : "Mavjud emas"}</span>
-          </h2>
-          <h2 className="text-2xl">
-            Lavozim:{" "}
-            <span>{user.position ? user.position : "Aniqlanmagan"}</span>
-          </h2>
-        </div>
       </div>
 
-      <div className="process  grid grid-cols-4 gap-10 mt-5">
+      <div className="process grid grid-cols-4 gap-10 mt-5">
         <div className="allProcess py-10 hover:shadow-lg relative text-center bg-cyan-700 text-white cursor-pointer">
           Barcha topshiriqlar
           <span className="absolute bottom-1 right-1 ">18</span>
@@ -72,6 +140,51 @@ function User1() {
         <div className="pandingProcess py-10 hover:shadow-lg relative text-center bg-yellow-700 text-white cursor-pointer">
           Kutilayotgan topshiriqlar
           <span className="absolute bottom-1 right-1 ">8</span>
+        </div>
+      </div>
+
+      {/* New Work History Table */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold mb-4">Mehnat faoliyati</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full bg-white rounded-lg shadow-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="border p-3 text-left">№</th>
+                <th className="border p-3 text-left">Ish boshlagan sana</th>
+                <th className="border p-3 text-left">Ish tugatgan sana</th>
+                <th className="border p-3 text-left">Tashkilot</th>
+                <th className="border p-3 text-left">STIR</th>
+                <th className="border p-3 text-left">Lavozim</th>
+                <th className="border p-3 text-left">Bo'lim</th>
+              </tr>
+            </thead>
+            <tbody>
+              {user.eduinfos?.map((data, index) => {
+                   const years = data.study_year ? data.study_year.split("-") : ["Aniqlanmagan", "Hozirgacha"];
+
+                return (
+                  <tr key={index}>
+                    <td className="border p-3">{index + 1}</td>
+                    <td className="border p-3">{years[0] || "Aniqlanmagan"}</td> 
+                    <td className="border p-3">{years[1] || "Hozirgacha"}</td>
+                    <td className="border p-3">
+                      {data.edu_name || "Company Name"}
+                    </td>
+                    <td className="border p-3">
+                      {data.id_number || "123456789"}
+                    </td>
+                    <td className="border p-3">
+                      {data.specialty || "Aniqlanmagan"}
+                    </td>
+                    <td className="border p-3">
+                      {data.department || "Mavjud emas"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

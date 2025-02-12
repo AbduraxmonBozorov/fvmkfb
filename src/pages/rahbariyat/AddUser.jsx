@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import WorkExperienceTable from "../../components/workExperiance/WorkExperiance";
 import FamilyTable from "../../components/familyTable/FamilyTable";
 
+
 function AddUser() {
   const [firstname, setFirstname] = useState("Abduraxmon");
   const [lastname, setLastname] = useState("Bozorov");
-  const [role, setRole] = useState("xodim");
+  const [role, setRole] = useState("hodim");
   const [birth_date, setBirth_Date] = useState("");
   const [address, setAddress] = useState(
     "Farg'ona viloyati Oltiariq tumani Jarqo'rg'ona MFY Qadriyat ko'chasi 6-uy"
@@ -77,15 +78,12 @@ function AddUser() {
     formData.append("edu", JSON.stringify(newEmployee.edu));
     formData.append("familyMembers", JSON.stringify(familyMembers));
     formData.append("workExperiences", JSON.stringify(workExperiences1));
-    const arr=[formData]
+    const arr = [formData];
 
-    const arr1=[newEmployee]
-    
-    
+    const arr1 = [newEmployee];
 
-    
     try {
-      const response = await fetch(`/user/register`, {       
+      const response = await fetch(`/user/register`, {
         method: "POST",
         body: formData,
       });
@@ -306,6 +304,14 @@ function AddUser() {
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
+              </div>
+
+              {/* role */}
+              <div className="sm:col-span-3">
+                <select onChange={(e)=>{setRole(e.target.value)}} name="role" id="role" className="select bg-white text-black w-full">
+                    <option value="hodim">Hodim</option>
+                    <option value="admin">Admin</option>
+                </select>
               </div>
             </div>
 
