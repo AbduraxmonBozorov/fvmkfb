@@ -8,7 +8,7 @@ function User1() {
   const [user, setUser] = useState({});
   // const [userData, setUserData] = useState({});
 
-  console.log(user);
+  console.log(11, user);
 
   const userId = useLocation().pathname.split("/user/")[1];
 
@@ -47,7 +47,7 @@ function User1() {
   //     .then((data) => data.json())
   //     .then((response) => {
   //       {
-  //         setUserData(response);
+  //         setUserData(response );
   //       }
   //     })
   //     .catch((error) => console.error("Error:", error));
@@ -66,16 +66,17 @@ function User1() {
         to="/"
         className="hover:text-sky-700 border rounded-lg bg-gray-200 px-2 py-3"
       >
-        <FontAwesomeIcon icon={faArrowLeft} />
-        <span className="ml-2">Qaytish</span>
+        <FontAwesomeIcon className="text-black" icon={faArrowLeft} />
+        <span className="ml-2 text-black">Qaytish</span>
       </Link>
 
       <div className="about-user mt-3">
         <div>
-          <h1 className="text-2xl font-bold mb-6">Umumiy ma'lumotlar</h1>
+          <h1 className="text-2xl font-bold mb-6 text-black">
+            Umumiy ma'lumotlar
+          </h1>
         </div>
 
-        {/* New Personal Information Section */}
         <div className="mt-6 bg-white rounded-lg p-6 shadow-sm flex justify-between">
           <div className="grid grid-cols-1 gap-4">
             <div>
@@ -127,10 +128,10 @@ function User1() {
           </div>
         </div>
       </div>
-
-      <div className="process grid grid-cols-4 gap-10 mt-5">
-        <div className="allProcess py-10 hover:shadow-lg relative text-center bg-cyan-700 text-white cursor-pointer">
-          Barcha topshiriqlar
+      
+       <div className="process grid grid-cols-4 gap-10 mt-5">
+         <div className="allProcess py-10 hover:shadow-lg relative text-center bg-cyan-700 text-white cursor-pointer">
+         Barcha topshiriqlar
           <span className="absolute bottom-1 right-1 ">18</span>
         </div>
         <div className="completedProcess py-10 hover:shadow-lg relative text-center bg-green-700 text-white cursor-pointer">
@@ -141,50 +142,144 @@ function User1() {
           Kutilayotgan topshiriqlar
           <span className="absolute bottom-1 right-1 ">8</span>
         </div>
-      </div>
+       </div> 
 
       {/* New Work History Table */}
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Mehnat faoliyati</h2>
+      <h2 className="text-2xl font-bold mb-4 text-black mt-5">
+            Ish faoliyati
+          </h2>
+        <table className="w-full bg-white rounded-lg shadow-sm">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="border p-3 text-left">№</th>
+              <th className="border p-3 pr-0 text-left">Ish boshlagan sana</th>
+              <th className="border p-3 pr-0 text-left">Ish tugatgan sana</th>
+              <th className="border p-3 text-left">Tashkilot</th>
+              <th className="border p-3 text-left">STIR</th>
+              <th className="border p-3 text-left">Lavozim</th>
+              <th className="border p-3 text-left">Bo'lim</th>
+            </tr>
+          </thead>
+          <tbody>
+            {user.work_Experiences?.map((data, index) => {
+              const years = data.job_year
+                ? data.job_year.split("-")
+                : ["Aniqlanmagan", "Hozirgacha"];
+
+              return (
+                <tr key={index}>
+                  <td className="border p-3">{index + 1}</td>
+                  <td className="border p-3">{years[0] || "Aniqlanmagan"}</td>
+                  <td className="border p-3">{years[1] || "Hozirgacha"}</td>
+                  <td className="border p-3">
+                    {data.organization_name || "Company Name"}
+                  </td>
+                  <td className="border p-3">{data.stir || "123456789"}</td>
+                  <td className="border p-3">
+                    {data.position || "Aniqlanmagan"}
+                  </td>
+                  <td className="border p-3">
+                    {data.departament || "Mavjud emas"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <h2 className="text-2xl font-bold mb-4 text-black mt-5">Ta'lim faoliyati</h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg shadow-sm">
             <thead className="bg-gray-50">
               <tr>
                 <th className="border p-3 text-left">№</th>
-                <th className="border p-3 text-left">Ish boshlagan sana</th>
-                <th className="border p-3 text-left">Ish tugatgan sana</th>
-                <th className="border p-3 text-left">Tashkilot</th>
-                <th className="border p-3 text-left">STIR</th>
-                <th className="border p-3 text-left">Lavozim</th>
-                <th className="border p-3 text-left">Bo'lim</th>
+                <th className="border p-3 text-left">O'qish boshlangan sana</th>
+                <th className="border p-3 text-left">O'qish tugagan sana</th>
+                <th className="border p-3 text-left">Ta'lim muassasa nomi</th>
+                <th className="border p-3 text-left">Malumot i</th>
+                <th className="border p-3 text-left">mutaxassislik</th>
+                <th className="border p-3 text-left">Talim ID</th>
               </tr>
             </thead>
             <tbody>
               {user.eduinfos?.map((data, index) => {
-                   const years = data.study_year ? data.study_year.split("-") : ["Aniqlanmagan", "Hozirgacha"];
+                const years = data.study_year
+                  ? data.study_year.split("-")
+                  : ["Aniqlanmagan", "Hozirgacha"];
 
                 return (
                   <tr key={index}>
                     <td className="border p-3">{index + 1}</td>
-                    <td className="border p-3">{years[0] || "Aniqlanmagan"}</td> 
+                    <td className="border p-3">{years[0] || "Aniqlanmagan"}</td>
                     <td className="border p-3">{years[1] || "Hozirgacha"}</td>
                     <td className="border p-3">
                       {data.edu_name || "Company Name"}
                     </td>
                     <td className="border p-3">
-                      {data.id_number || "123456789"}
+                      {data.degree || "Aniqlanmagan"}
                     </td>
                     <td className="border p-3">
                       {data.specialty || "Aniqlanmagan"}
                     </td>
                     <td className="border p-3">
-                      {data.department || "Mavjud emas"}
+                      {data.edu_id || "Mavjud emas"}
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          <h2 className="text-2xl font-bold mb-4 text-black mt-5">
+            Oila azolari
+          </h2>
+
+          <table className="w-full bg-white rounded-lg shadow-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="border p-3 text-left">№</th>
+                <th className="border p-3 text-left">Oila a'zosi</th>
+                <th className="border p-3 text-left">F.I.Sh</th>
+                <th className="border p-3 text-left"> Tug'ilgan sana</th>
+                <th className="border p-3 text-left">Manzil</th>
+                <th className="border p-3 text-left">Ish joyi</th>
+                <th className="border p-3 text-left"> Ma'lumoti</th>
+              </tr>
+            </thead>
+            <tbody>
+              {user.family_members?.map((data, index) => {
+                const formatDate = (dateString) => {
+                  if (!dateString) return "Tug'ilgan sana mavjud emas"; // Xatolik oldini olish
+                  const date = new Date(dateString);
+                  return date.toISOString().split("T")[0]; // "1990-01-01" formatida qaytaradi
+                };
+
+                return (
+                  <tr key={index}>
+                    <td className="border p-3">{index + 1}</td>
+                    <td className="border p-3">
+                      {data.family_member || "Aniqlanmagan"}
+                    </td>
+                    <td className="border p-3">
+                      {data.fullname || "aniqlanmagan"}
+                    </td>
+                    <td className="border p-3">
+                      {formatDate(data.birth_data) || "aniqlanmagan"}
+                    </td>
+                    <td className="border p-3">
+                      {data.address || "123456789"}
+                    </td>
+                    <td className="border p-3">
+                      {data.job_address || "Aniqlanmagan"}
+                    </td>
+                    <td className="border p-3">
+                      {data.grade || "Mavjud emas"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          
         </div>
       </div>
     </div>
