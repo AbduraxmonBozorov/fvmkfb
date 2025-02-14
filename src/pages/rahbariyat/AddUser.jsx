@@ -28,7 +28,6 @@ function AddUser() {
   const [email, setEmail] = useState("abduraxmon@gmail.com");
   const [workExperiences, setworkExperiences] = useState([]);
   const [familyMembers, setFamilyMembers] = useState([]);
-
   const [picFile, setPicFile] = useState({});
 
   const handleSubmit = async (e) => {
