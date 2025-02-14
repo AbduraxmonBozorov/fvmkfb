@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { Home, Users, FileText, Settings, LogOut } from "lucide-react";
+import { baseURL } from "../utils/config";
+
+
 
 const sidebarVariants = {
   open: { x: 0 },
@@ -12,6 +15,16 @@ export default function Layout({ children, handleLogout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [userPic, setUserPic] = useState("");
+  
+
+useEffect(() => {
+  if (user?.picture) {
+    setUserPic(`${baseURL}uploads/userphotos/${user.picture}`);
+  }
+}, [user]);
+
+
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
@@ -100,8 +113,8 @@ export default function Layout({ children, handleLogout }) {
               <span className="text-gray-700">{user?.fullname}</span>
               <img
                 className="w-8 h-8 rounded-full object-cover"
-                src={user?.picture}
-                alt="Admin"
+              src={userPic}
+                alt="user picture"
               />
             </div>
           </div>

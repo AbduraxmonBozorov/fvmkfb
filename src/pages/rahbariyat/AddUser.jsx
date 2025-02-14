@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import WorkExperienceTable from "../../components/workExperiance/WorkExperiance";
 import FamilyTable from "../../components/familyTable/FamilyTable";
 
-
 function AddUser() {
   const [firstname, setFirstname] = useState("Abduraxmon");
   const [lastname, setLastname] = useState("Bozorov");
@@ -29,6 +28,8 @@ function AddUser() {
   const [email, setEmail] = useState("abduraxmon@gmail.com");
   const [workExperiences, setworkExperiences] = useState([]);
   const [familyMembers, setFamilyMembers] = useState([]);
+
+  const [picFile, setPicFile] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +73,7 @@ function AddUser() {
     formData.append("birth_date", birth_date);
     formData.append("department", department);
     formData.append("position", position);
-    formData.append("picture", newEmployee.picture);
+    formData.append("picture", picFile);
     formData.append("address", address);
     formData.append("phone", phone);
     formData.append("edu", JSON.stringify(newEmployee.edu));
@@ -102,10 +103,11 @@ function AddUser() {
   // Rasm yuklash funksiyasi
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    setPicFile(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImagePreview(reader.result); // Yuklangan rasmni ko'rsatish uchun
+        setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -308,9 +310,16 @@ function AddUser() {
 
               {/* role */}
               <div className="sm:col-span-3">
-                <select onChange={(e)=>{setRole(e.target.value)}} name="role" id="role" className="select bg-white text-black w-full">
-                    <option value="hodim">Hodim</option>
-                    <option value="admin">Admin</option>
+                <select
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                  name="role"
+                  id="role"
+                  className="select bg-white text-black w-full"
+                >
+                  <option value="hodim">Hodim</option>
+                  <option value="admin">Admin</option>
                 </select>
               </div>
             </div>

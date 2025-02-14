@@ -3,12 +3,11 @@ import userImage from "../assets/images/circle-user-regular.svg";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { baseURL } from "../utils/config";
 
 function User1() {
   const [user, setUser] = useState({});
-  // const [userData, setUserData] = useState({});
-
-  console.log(user);
+  const [userPic, setUserPic] = useState("");
 
   const userId = useLocation().pathname.split("/user/")[1];
 
@@ -23,6 +22,10 @@ function User1() {
         .catch((error) => console.error(error));
     }
   }, [userId]);
+
+  useEffect(()=>{
+    setUserPic(`${baseURL}uploads/userphotos/${user.picture}`)
+  }, [user])
 
   const formatPhoneNumber = (phone) => {
     if (!phone) return "Telefon raqam mavjud emas"; // Undefined bo'lsa xatolik bermasligi uchun
@@ -120,7 +123,7 @@ function User1() {
           </div>
           <div className="">
             <img
-              src={"https://picsum.photos/200"}
+              src={userPic}
               className="border w-[200px] h-[240px] rounded-2xl object-cover"
               alt={"xatolik"}
             />

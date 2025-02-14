@@ -15,7 +15,7 @@ function App() {
     : null;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
-  console.log("API message: " + localStorage.getItem("apiMessage"));
+  // console.log("API message: " + localStorage.getItem("apiMessage"));
 
   useEffect(() => {
     if (token) {
