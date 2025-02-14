@@ -78,9 +78,8 @@ function AddUser() {
     formData.append("edu", JSON.stringify(newEmployee.edu));
     formData.append("familyMembers", JSON.stringify(familyMembers));
     formData.append("workExperiences", JSON.stringify(workExperiences1));
-    const arr = [formData];
-
-    const arr1 = [newEmployee];
+    
+   
 
     try {
       const response = await fetch(`/user/register`, {

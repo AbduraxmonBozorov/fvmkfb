@@ -7,7 +7,6 @@ import { baseURL } from "../utils/config";
 
 function User1() {
   const [user, setUser] = useState({});
-  console.log(11, user);
   const [userPic, setUserPic] = useState("");
 
   const userId = useLocation().pathname.split("/user/")[1];
