@@ -28,7 +28,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([])
   const [oliy, setOliy] = useState(0);
-  const [ortaMaxsus, setOrtaMaxsus] = useState(0);  
+  const [ortaMaxsus, setOrtaMaxsus] = useState(0); 
 
   useEffect(()=>{
     fetch('/api/user?page=1&limit=12')
@@ -48,6 +48,22 @@ export default function Dashboard() {
       localStorage.setItem("user", JSON.stringify(data))
     })
   }, []);
+  console.log(employees);
+  
+
+  useEffect(()=>{
+
+    employees.map((xodim)=>(
+      xodim.eduinfos.map(edu =>(        
+        edu.degree.toLowerCase() == "oliy" ? setOliy(item=>item+1) : ""
+      ))
+    ))
+    console.log(oliy);
+  }, [employees])
+  
+  useEffect(()=>{
+    setOrtaMaxsus(employees.length-oliy)
+  }, [oliy])
   
 
   function handleUser(id) {
@@ -123,10 +139,10 @@ export default function Dashboard() {
                     {employee.position}
                   </h2>
                   <h2 className="w-full py-2 px-3 text-xl">
-                    {employee.education}
+                    {employee.eduinfos[0].degree}
                   </h2>
                   <h2 className="w-full py-2 px-3 text-xl">
-                    {employee.entity ? employee.entity : ""}
+                    {}
                   </h2> 
                   <h2 className="w-full py-2 px-3 text-xl">
                     {employee.grade}

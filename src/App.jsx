@@ -10,22 +10,28 @@ import Settings from "./pages/Settings";
 import Davomat from "./pages/rahbariyat/Davomat";
 
 function App() {
-  const token = localStorage.getItem("token") ? localStorage.getItem("token") : "";
-  const [isAuthenticated, setIsAuthenticated] = useState(token ? true : false);
+  const token = localStorage.getItem("token")
+    ? localStorage.getItem("token")
+    : null;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
-  
-  
-  
+  // console.log("API message: " + localStorage.getItem("apiMessage"));
 
-  const handleLogin = (token) => {
-    localStorage.setItem("authToken", token);
-    setIsAuthenticated(true);
-    navigate("/"); // Redirect to the dashboard after login
-  };
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
+  useEffect(() => {
+    setIsAuthenticated(!!token);
+  }, [token]);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
     localStorage.removeItem("token");
+    localStorage.setItem("apiMessage", "Siz tizimdan muvoffaqiyatli chiqdiz!");
     localStorage.removeItem("user");
     setIsAuthenticated(false);
     navigate("/login"); // Redirect to login page after logout
@@ -89,7 +95,7 @@ function App() {
             )
           }
         />
-        
+
         {/* User info */}
         <Route
           path="/user/:id"
@@ -103,17 +109,11 @@ function App() {
             )
           }
         />
-        
+
         {/* Login */}
         <Route
           path="/login"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/" replace />
-            ) : (
-              <Login setIsAuthenticated={handleLogin} />
-            )
-          }
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Login />}
         />
 
         <Route

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
   const [formData, setFormData] = useState({ email: "", phone: "" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();    
@@ -20,11 +20,16 @@ const Login = ({ setIsAuthenticated }) => {
 
       if (response.status == 200) {
         await  localStorage.setItem("token", response.data.token);
+        localStorage.removeItem("apiMessage")
+        await localStorage.setItem("apiMessage", response.data.message)
         navigate("/");
+
+        
       }
     } catch (err) {
-      console.error("Xato:", err.message);
-      setError("Kirishda xatolik yuz berdi");
+      setError(err.response.data);
+      localStorage.removeItem("apiMessage")
+      localStorage.setItem("apiMessage", err.response.data.message);
     }
   };
 
