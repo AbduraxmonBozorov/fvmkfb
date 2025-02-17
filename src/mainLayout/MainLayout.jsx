@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Home, Users, FileText, Settings, LogOut } from "lucide-react";
 import { baseURL } from "../utils/config";
 
-
-
 const sidebarVariants = {
   open: { x: 0 },
   closed: { x: "-100%" },

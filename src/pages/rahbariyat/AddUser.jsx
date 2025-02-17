@@ -2,30 +2,22 @@ import React, { useRef, useState } from "react";
 import WorkExperienceTable from "../../components/workExperiance/WorkExperiance";
 import FamilyTable from "../../components/familyTable/FamilyTable";
 
-function AddUser() {
-  const [firstname, setFirstname] = useState("Abduraxmon");
-  const [lastname, setLastname] = useState("Bozorov");
+function AddUser({ setMessage }) {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [role, setRole] = useState("hodim");
   const [birth_date, setBirth_Date] = useState("");
-  const [address, setAddress] = useState(
-    "Farg'ona viloyati Oltiariq tumani Jarqo'rg'ona MFY Qadriyat ko'chasi 6-uy"
-  );
+  const [address, setAddress] = useState("");
   const [imagePreview, setImagePreview] = useState("");
-  const [jobPlace, setJobPlace] = useState(
-    "Farg'ona vodiysi magistral kanallaridan foydalanish boshqarmasi"
-  );
-  const [department, setDepartment] = useState(
-    "Axborot kommunikatsiya texnologiyalari va raqamli texnologiyalarni rivojlantirish bo'limi"
-  );
-  const [position, setPosition] = useState("Bo'lim boshlig'i");
-  const [eduName, setEduName] = useState(
-    "Toshkent Axborot Texnologiyalari Universiteti"
-  );
-  const [education, setEducation] = useState("Oliy");
-  const [eduPeriod, setEduPeriod] = useState("2018-2022");
-  const [specialty, setSpecialty] = useState("Kompyuter injiner");
-  const [phone, setPhone] = useState("998905305053");
-  const [email, setEmail] = useState("abduraxmon@gmail.com");
+  const [jobPlace, setJobPlace] = useState("");
+  const [department, setDepartment] = useState("");
+  const [position, setPosition] = useState("");
+  const [eduName, setEduName] = useState("");
+  const [education, setEducation] = useState("");
+  const [eduPeriod, setEduPeriod] = useState("");
+  const [specialty, setSpecialty] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [workExperiences, setworkExperiences] = useState([]);
   const [familyMembers, setFamilyMembers] = useState([]);
   const [picFile, setPicFile] = useState({});
@@ -78,8 +70,6 @@ function AddUser() {
     formData.append("edu", JSON.stringify(newEmployee.edu));
     formData.append("familyMembers", JSON.stringify(familyMembers));
     formData.append("workExperiences", JSON.stringify(workExperiences1));
-    
-   
 
     try {
       const response = await fetch(`/user/register`, {
@@ -89,12 +79,14 @@ function AddUser() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Serverdan javob:", result);
+        setMessage(result.message);
       } else {
         console.error("Serverda xatolik:", response.status);
+        setMessage(response.status);
       }
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
+      setMessage(error);
     }
   };
 

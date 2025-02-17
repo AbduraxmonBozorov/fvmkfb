@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({setMessage}) => {
   const [formData, setFormData] = useState({ email: "", phone: "" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -20,16 +20,14 @@ const Login = () => {
 
       if (response.status == 200) {
         await  localStorage.setItem("token", response.data.token);
-        localStorage.removeItem("apiMessage")
-        await localStorage.setItem("apiMessage", response.data.message)
+        setMessage(response.data.message)
         navigate("/");
 
         
       }
     } catch (err) {
       setError(err.response.data);
-      localStorage.removeItem("apiMessage")
-      localStorage.setItem("apiMessage", err.response.data.message);
+      setMessage( err.response.data.message);
     }
   };
 

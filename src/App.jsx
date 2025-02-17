@@ -8,6 +8,7 @@ import Tasks from "./pages/Tasks";
 import AddUser from "./pages/rahbariyat/AddUser";
 import Settings from "./pages/Settings";
 import Davomat from "./pages/rahbariyat/Davomat";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const token = localStorage.getItem("token")
@@ -15,7 +16,8 @@ function App() {
     : null;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
-  // console.log("API message: " + localStorage.getItem("apiMessage"));
+  const [message, setMessage] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     if (token) {
@@ -25,20 +27,26 @@ function App() {
     }
   }, []);
 
+  useEffect(()=>{
+     message.length ? toast(message) : "";
+  }, [message])
+
   useEffect(() => {
     setIsAuthenticated(!!token);
   }, [token]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.setItem("apiMessage", "Siz tizimdan muvoffaqiyatli chiqdiz!");
     localStorage.removeItem("user");
+    localStorage.removeItem("auth");
+    setMessage("Siz tizimdan muvoffaqiyatli chiqdiz!");
     setIsAuthenticated(false);
-    navigate("/login"); // Redirect to login page after logout
+    navigate("/login");
   };
 
   return (
     <div>
+      <ToastContainer />
       <Routes>
         {/* Dashboard */}
         <Route
@@ -74,7 +82,7 @@ function App() {
           element={
             isAuthenticated ? (
               <MainLayout handleLogout={handleLogout}>
-                <AddUser onLogout={handleLogout} />
+                <AddUser onLogout={handleLogout} setMessage={setMessage}/>
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
@@ -113,7 +121,7 @@ function App() {
         {/* Login */}
         <Route
           path="/login"
-          element={isAuthenticated ? <Navigate to="/" replace /> : <Login />}
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Login setMessage={setMessage} />}
         />
 
         <Route
