@@ -27,9 +27,9 @@ function App() {
     }
   }, []);
 
-  useEffect(()=>{
-     message.length ? toast(message) : "";
-  }, [message])
+  useEffect(() => {
+    message.length ? toast(message) : "";
+  }, [message]);
 
   useEffect(() => {
     setIsAuthenticated(!!token);
@@ -82,7 +82,7 @@ function App() {
           element={
             isAuthenticated ? (
               <MainLayout handleLogout={handleLogout}>
-                <AddUser onLogout={handleLogout} setMessage={setMessage}/>
+                <AddUser onLogout={handleLogout} setMessage={setMessage} />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
@@ -110,7 +110,7 @@ function App() {
           element={
             isAuthenticated ? (
               <MainLayout handleLogout={handleLogout}>
-                <User1 />
+                <User1 setMessage={setMessage} />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
@@ -121,7 +121,13 @@ function App() {
         {/* Login */}
         <Route
           path="/login"
-          element={isAuthenticated ? <Navigate to="/" replace /> : <Login setMessage={setMessage} />}
+          element={
+            isAuthenticated ? (
+              <Navigate to="/" replace />
+            ) : (
+              <Login setMessage={setMessage} />
+            )
+          }
         />
 
         <Route

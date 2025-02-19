@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import userImage from "../assets/images/circle-user-regular.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { baseURL } from "../utils/config";
+import { Button } from "@chakra-ui/react";
 
-function User1() {
+function User1({ setMessage }) {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [userPic, setUserPic] = useState("");
-
   const userId = useLocation().pathname.split("/user/")[1];
 
   useEffect(() => {
@@ -23,9 +24,9 @@ function User1() {
     }
   }, [userId]);
 
-  useEffect(()=>{
-    setUserPic(`${baseURL}uploads/userphotos/${user.picture}`)
-  }, [user])
+  useEffect(() => {
+    setUserPic(`${baseURL}uploads/userphotos/${user.picture}`);
+  }, [user]);
 
   const formatPhoneNumber = (phone) => {
     if (!phone) return "Telefon raqam mavjud emas"; // Undefined bo'lsa xatolik bermasligi uchun
@@ -41,26 +42,20 @@ function User1() {
     return date.toISOString().split("T")[0]; // "1990-01-01" formatida qaytaradi
   };
 
-  // useEffect(() => {
-  //   fetch(`/user/me/profile`, {
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   })
-  //     .then((data) => data.json())
-  //     .then((response) => {
-  //       {
-  //         setUserData(response );
-  //       }
-  //     })
-  //     .catch((error) => console.error("Error:", error));
-  // }, [userId]);
-
-  const personalInfo = {
-    fullName: "Kamolov Alisher Akmalovich",
-    birthDate: "15.08.1984",
-    address:
-      "Farg'ona viloyati Farg'ona shahar Mustaqillik MFY Alisher Navoiy ko'chasi 15-uy",
+  const removeUser = () => {
+    fetch(`/api/user/${userId}`, {
+      method: "DELETE",
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.result == 1) {
+          setMessage("Foydalanuvchi muvoffaqiyatli  o'chirildi!");
+          navigate("/")
+        }
+      })
+      .catch((error) =>
+        console.log("Foydalanuvchini o'chirishda xatolik: ", error)
+      );
   };
 
   return (
@@ -72,6 +67,14 @@ function User1() {
         <FontAwesomeIcon className="text-black" icon={faArrowLeft} />
         <span className="ml-2 text-black">Qaytish</span>
       </Link>
+
+      <button
+        className="btn bg-red-500 border-0 float-end"
+        type="button"
+        onClick={removeUser}
+      >
+        O'chirish
+      </button>
 
       <div className="about-user mt-3">
         <div>
@@ -109,7 +112,7 @@ function User1() {
             </div>
             <div>
               <label className="text-gray-600 text-1xl">Manzili:</label>
-              <div className="font-medium text-1xl">{personalInfo.address}</div>
+              <div className="font-medium text-1xl">{user?.address}</div>
             </div>
             <div>
               <label className="text-gray-600 text-1xl">Email:</label>
@@ -131,10 +134,10 @@ function User1() {
           </div>
         </div>
       </div>
-      
-       <div className="process grid grid-cols-4 gap-10 mt-5">
-         <div className="allProcess py-10 hover:shadow-lg relative text-center bg-cyan-700 text-white cursor-pointer">
-         Barcha topshiriqlar
+
+      <div className="process grid grid-cols-4 gap-10 mt-5">
+        <div className="allProcess py-10 hover:shadow-lg relative text-center bg-cyan-700 text-white cursor-pointer">
+          Barcha topshiriqlar
           <span className="absolute bottom-1 right-1 ">18</span>
         </div>
         <div className="completedProcess py-10 hover:shadow-lg relative text-center bg-green-700 text-white cursor-pointer">
@@ -145,13 +148,13 @@ function User1() {
           Kutilayotgan topshiriqlar
           <span className="absolute bottom-1 right-1 ">8</span>
         </div>
-       </div> 
+      </div>
 
       {/* New Work History Table */}
       <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4 text-black mt-5">
-            Ish faoliyati
-          </h2>
+        <h2 className="text-2xl font-bold mb-4 text-black mt-5">
+          Ish faoliyati
+        </h2>
         <table className="w-full bg-white rounded-lg shadow-sm">
           <thead className="bg-gray-50">
             <tr>
@@ -190,7 +193,9 @@ function User1() {
             })}
           </tbody>
         </table>
-        <h2 className="text-2xl font-bold mb-4 text-black mt-5">Ta'lim faoliyati</h2>
+        <h2 className="text-2xl font-bold mb-4 text-black mt-5">
+          Ta'lim faoliyati
+        </h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg shadow-sm">
             <thead className="bg-gray-50">
@@ -282,7 +287,6 @@ function User1() {
               })}
             </tbody>
           </table>
-          
         </div>
       </div>
     </div>

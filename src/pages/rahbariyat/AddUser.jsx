@@ -27,10 +27,11 @@ function AddUser({ setMessage }) {
 
     const newJob = {
       id: workExperiences.length + 1, // ID qatorlar soniga asoslanadi
-      period: `${new Date().getFullYear()} - now`,
-      organization: jobPlace,
-      department,
+      job_year: `${new Date().getFullYear()} - now`,
+      organization_name: jobPlace,
+      department: department,
       position,
+      stir: 200147396
     };
 
     let workExperiences1 = [...workExperiences, newJob];
@@ -69,8 +70,8 @@ function AddUser({ setMessage }) {
     formData.append("phone", phone);
     formData.append("edu", JSON.stringify(newEmployee.edu));
     formData.append("familyMembers", JSON.stringify(familyMembers));
-    formData.append("workExperiences", JSON.stringify(workExperiences1));
-
+    formData.append("work_experience", JSON.stringify(workExperiences1));
+    
     try {
       const response = await fetch(`/user/register`, {
         method: "POST",
