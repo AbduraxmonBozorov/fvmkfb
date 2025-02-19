@@ -26,45 +26,43 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [employees, setEmployees] = useState([])
+  const [employees, setEmployees] = useState([]);
   const [oliy, setOliy] = useState(0);
   const [ortaMaxsus, setOrtaMaxsus] = useState(0);
- 
-  useEffect(()=>{
-    fetch('/api/user?page=1&limit=12')
-    .then((response) => response.json())
-    .then((data) => {
-      setEmployees(data.users)
-    })    
-    .catch((error) => console.error(error));
+
+  useEffect(() => {
+    fetch("/api/user?page=1&limit=10")
+      .then((response) => response.json())
+      .then((data) => {
+        setEmployees(data.users);
+      })
+      .catch((error) => console.error(error));
 
     fetch(`/user/me/profile`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
-    .then(resp =>resp.json())
-    .then(data => {
-      localStorage.setItem("user", JSON.stringify(data))
-    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
+      });
   }, []);
-  
 
-  useEffect(()=>{
-    employees.map((xodim)=>(
-      xodim.eduinfos.map(edu =>(        
-        edu.degree.toLowerCase() == "oliy" ? setOliy(item=>item+1) : ""
-      ))
-    ))
-  }, [employees])
-  
-  useEffect(()=>{
-    setOrtaMaxsus(employees.length-oliy)
-  }, [oliy])
-  
+  useEffect(() => {
+    employees.map((xodim) =>
+      xodim.eduinfos.map((edu) =>
+        edu.degree.toLowerCase() == "oliy" ? setOliy((item) => item + 1) : ""
+      )
+    );
+  }, [employees]);
+
+  useEffect(() => {
+    setOrtaMaxsus(employees.length - oliy);
+  }, [oliy]);
 
   function handleUser(id) {
-    navigate(`user/${id}`)
+    navigate(`user/${id}`);
   }
 
   return (
@@ -72,7 +70,7 @@ export default function Dashboard() {
       <h2 className="text-3xl font-bold text-gray-800">
         Hodimlar statistikasi
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           icon={Users}
@@ -93,7 +91,9 @@ export default function Dashboard() {
           color="text-yellow-600"
         />
         <button
-          onClick={()=>{navigate("/addUser")}}
+          onClick={() => {
+            navigate("/addUser");
+          }}
           className="bg-white rounded-lg shadow-md p-6 flex items-center justify-center space-x-4 text-purple-600 hover:bg-purple-50 transition duration-300"
         >
           <UserPlus size={40} />
@@ -123,7 +123,9 @@ export default function Dashboard() {
                 <div
                   key={id}
                   className="tbody-tr flex flex-row justify-between align-middle hover:bg-gray-100 hover:text-blue-300 cursor-pointer"
-                  onClick={()=>{handleUser(employee.user_id)}}
+                  onClick={() => {
+                    handleUser(employee.user_id);
+                  }}
                 >
                   <h2 className="w-full py-2 px-3 text-xl">
                     {employee.fullname}
@@ -138,19 +140,23 @@ export default function Dashboard() {
                     {employee.eduinfos[0].degree}
                   </h2>
                   <h2 className="w-full py-2 px-3 text-xl">
-                    {employee.work_Experiences[0]?.organization_name}
-                  </h2> 
+                    {
+                      employee.work_Experiences[
+                        `${employee.work_Experiences.length - 1}`
+                      ]?.organization_name
+                    }
+                  </h2>
                 </div>
               ))
             ) : (
-              <h1 className="m-5 text-2xl font-semibold">Foydalanuvchi topilmadi!</h1>
+              <h1 className="m-5 text-2xl font-semibold">
+                Foydalanuvchi topilmadi!
+              </h1>
             )}
           </div>
         </section>
       </div>
       <Pagination currentPage={1} totalPages={5} />
-      
     </div>
   );
 }
-

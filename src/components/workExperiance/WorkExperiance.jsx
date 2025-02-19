@@ -6,7 +6,7 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
   const addRow = () => {
     const newRow = {
       id: workExperiences.length + 1, // ID qatorlar soniga asoslanadi
-      period: "",
+      job_year: "",
       organization: "",
       department: "",
       position: "",
@@ -41,9 +41,9 @@ const WorkExperienceTable = ({ workExperiences, setworkExperiences }) => {
               <td>
                 <input
                   type="text"
-                  value={work.period}
+                  value={work.job_year}
                   onChange={(e) =>
-                    handleInputChange(index, "period", e.target.value)
+                    handleInputChange(index, "job_year", e.target.value)
                   }
                   placeholder="2015-2020"
                 />

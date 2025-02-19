@@ -14,15 +14,12 @@ export default function Layout({ children, handleLogout }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [userPic, setUserPic] = useState("");
-  
 
-useEffect(() => {
-  if (user?.picture) {
-    setUserPic(`${baseURL}uploads/userphotos/${user.picture}`);
-  }
-}, [user]);
-
-
+  useEffect(() => {
+    if (user?.picture) {
+      setUserPic(`${baseURL}uploads/userphotos/${user.picture}`);
+    }
+  }, [user]);
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
@@ -111,7 +108,7 @@ useEffect(() => {
               <span className="text-gray-700">{user?.fullname}</span>
               <img
                 className="w-8 h-8 rounded-full object-cover"
-              src={userPic}
+                src={userPic}
                 alt="user picture"
               />
             </div>
