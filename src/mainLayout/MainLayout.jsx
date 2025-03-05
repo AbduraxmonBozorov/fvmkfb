@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { Home, Users, FileText, Settings, LogOut } from "lucide-react";
+import { Home, Users, FileText, Settings, LogOut, CalendarDays } from "lucide-react";
 import { baseURL } from "../utils/config";
+
+
 
 const sidebarVariants = {
   open: { x: 0 },
@@ -23,6 +25,7 @@ export default function Layout({ children, handleLogout }) {
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
+      {/* Side-bar */}
       <motion.nav
         initial="closed"
         animate={isSidebarOpen ? "open" : "closed"}
@@ -32,6 +35,7 @@ export default function Layout({ children, handleLogout }) {
         <div className="p-4">
           <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
         </div>
+        {/* Navigation */}
         <ul className="space-y-2 p-4">
           <li>
             <Link
@@ -51,6 +55,17 @@ export default function Layout({ children, handleLogout }) {
               <span>Xodim qo'shish</span>
             </Link>
           </li>
+        {/* Davomat */}
+        <li>
+            <Link
+              to="/davomat"
+              className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2"
+            >
+              <CalendarDays size={20} />
+              <span>Davomat</span>
+            </Link>
+          </li>
+
 
           <li>
             <Link
@@ -72,6 +87,7 @@ export default function Layout({ children, handleLogout }) {
           </li>
         </ul>
 
+        {/* CHiqish button */}
         <div className="absolute bottom-0 w-full p-4">
           <Link to="" onClick={handleLogout}>
             <button className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2 w-full">
@@ -84,8 +100,8 @@ export default function Layout({ children, handleLogout }) {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-white shadow-sm">
-          <div className="flex items-center justify-between p-4">
-            <button
+          <div className="flex items-center justify-end p-4">
+            {/* <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="text-gray-500 hover:text-gray-700"
             >
@@ -103,7 +119,7 @@ export default function Layout({ children, handleLogout }) {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </button>
+            </button> */}
             <div className="flex items-center space-x-4">
               <span className="text-gray-700">{user?.fullname}</span>
               <img

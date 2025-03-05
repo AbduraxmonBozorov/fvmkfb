@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({setMessage}) => {
+const Login = ({ setMessage, setToken }) => {
   const [formData, setFormData] = useState({ email: "", phone: "" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
 
   const handleSubmit = async (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     try {
       const response = await axios.post("/user/login", formData, {
         headers: {
@@ -18,16 +17,23 @@ const Login = ({setMessage}) => {
         withCredentials: true,
       });
 
-      if (response.status == 200) {
-        await  localStorage.setItem("token", response.data.token);
-        setMessage(response.data.message)
-        navigate("/");
-
-        
+      if (
+        response.status === 200 &&
+        response.data.message == "siz tizimga muvaffaqiyatli kirdiz"
+      ) {
+        localStorage.setItem("token", response.data.token);
+        setToken(response.data.token); // ✅ token holatini yangilash
+        setMessage(response.data.message);
+        navigate("/"); // 🎯 Foydalanuvchini Dashboard sahifasiga yo‘naltirish
+      } else {
+        setError(err.response?.data?.message || "Xatolik yuz berdi");
+        setMessage(err.response?.data?.message || "Xatolik yuz berdi");
+        console.log(err);
       }
     } catch (err) {
-      setError(err.response.data);
-      setMessage( err.response.data.message);
+      setError(err.response?.data?.message || "Xatolik yuz berdi");
+      setMessage(err.response?.data?.message || "Xatolik yuz berdi");
+      console.log(err);
     }
   };
 
