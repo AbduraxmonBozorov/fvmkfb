@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { Home, Users, FileText, Settings, LogOut } from "lucide-react";
+import { Home, Users, FileText, Settings, LogOut, Building } from "lucide-react";
 import { baseURL } from "../utils/config";
 
 const sidebarVariants = {
@@ -59,6 +59,15 @@ export default function Layout({ children, handleLogout }) {
             >
               <FileText size={20} />
               <span>Topshiriqlar</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/building"
+              className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2"
+            >
+              <Building size={20} />
+              <span>Qurilish</span>
             </Link>
           </li>
           <li>

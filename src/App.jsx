@@ -8,6 +8,7 @@ import Tasks from "./pages/Tasks";
 import AddUser from "./pages/rahbariyat/AddUser";
 import Settings from "./pages/Settings";
 import Davomat from "./pages/rahbariyat/Davomat";
+import Building from "./pages/building"
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     } else {
       navigate("/login");
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     message.length ? toast(message) : "";
@@ -129,6 +130,20 @@ function App() {
             )
           }
         />
+
+        <Route
+          path="/building"
+          element={
+            isAuthenticated ? (
+              <MainLayout handleLogout={handleLogout}>
+                <Building />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
 
         <Route
           path="/settings"
