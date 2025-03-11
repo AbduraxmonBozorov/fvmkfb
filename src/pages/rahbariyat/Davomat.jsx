@@ -5,7 +5,11 @@ import UserSearch from "../../components/SearchUser";
 function Davomat() {
   const today = new Date().toISOString().split("T")[0]; // 📅 Bugungi sana
   const [selectDay, setSelectDay] = useState(today);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState(
+    localStorage.getItem("selectedUsers")
+      ? JSON.parse(localStorage.getItem("selectedUsers"))
+      : []
+  );
   const [allUsers, setAllUsers] = useState([]);
   const [clickedUserId, setClickedUserId] = useState(null);
   const [attendance, setAttendance] = useState({}); // ✅ Davomat holati
@@ -24,6 +28,7 @@ function Davomat() {
           }
           return [...prevUsers, data];
         });
+        localStorage.setItem("selectedUsers", JSON.stringify(selectedUsers));
       })
       .catch((error) => console.error("Xatolik:", error));
   }, [clickedUserId]);
@@ -63,6 +68,17 @@ function Davomat() {
     setSelectDay(today);
   };
 
+  const removeUser = (id, fullname) => {
+    let req = confirm(`Haqiqatdan ham ${fullname} ni o'chirmoqchimisiz?`);
+    if (req == true) {
+      let filteredUsers = selectedUsers.filter((user) => {
+        return user.user_id != id;
+      });
+      setSelectedUsers(filteredUsers); // 💡 selectedUsers ni yangilash kerak
+      localStorage.setItem("selectedUsers", JSON.stringify(filteredUsers)); // 🔄 LocalStorage ni ham yangilash
+    }
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold">📅 Davomat</h1>
@@ -86,10 +102,11 @@ function Davomat() {
             <th>№</th>
             <th>Ism familiyasi</th>
             <th>Holati</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {selectedUsers.map((user, index) => (
+          {selectedUsers?.map((user, index) => (
             <tr key={user.user_id} className="text-lg">
               <td>{index + 1}</td>
               <td>{user.fullname}</td>
@@ -98,6 +115,16 @@ function Davomat() {
                   checked={attendance[user.user_id] || false}
                   onChange={() => handleSwitchChange(user.user_id)}
                 />
+              </td>
+              <td>
+                <button
+                  onClick={() => {
+                    removeUser(user.user_id, user.fullname);
+                  }}
+                  className="btn bg-red-500 text-white"
+                >
+                  O'chirish
+                </button>
               </td>
             </tr>
           ))}
