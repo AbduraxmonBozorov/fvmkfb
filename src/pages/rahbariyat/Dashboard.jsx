@@ -26,6 +26,7 @@ const StatCard = ({ icon: Icon, title, value, color }) => (
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const [allEmployees, setAllEmployees] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [oliy, setOliy] = useState(0);
   const [ortaMaxsus, setOrtaMaxsus] = useState(0);
@@ -35,6 +36,13 @@ export default function Dashboard() {
       .then((response) => response.json())
       .then((data) => {
         setEmployees(data.users);
+      })
+      .catch((error) => console.error(error));
+
+    fetch(`/user`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllEmployees(data.users);
       })
       .catch((error) => console.error(error));
 
@@ -50,12 +58,12 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    employees.map((xodim) =>
+    allEmployees.map((xodim) =>
       xodim.eduinfos.map((edu) =>
         edu.degree.toLowerCase() == "oliy" ? setOliy((item) => item + 1) : ""
       )
     );
-  }, [employees]);
+  }, [allEmployees]);
 
   useEffect(() => {
     setOrtaMaxsus(employees.length - oliy);
@@ -75,7 +83,7 @@ export default function Dashboard() {
         <StatCard
           icon={Users}
           title="Jami hodimlar"
-          value={employees.length}
+          value={allEmployees.length}
           color="text-blue-600"
         />
         <StatCard
@@ -140,11 +148,7 @@ export default function Dashboard() {
                     {employee.eduinfos[0].degree}
                   </h2>
                   <h2 className="w-full py-2 px-3 text-xl">
-                    {
-                      employee.work_Experiences[
-                        `${employee.work_Experiences.length - 1}`
-                      ]?.organization_name
-                    }
+                    {employee.work_Experiences[0]?.organization_name}
                   </h2>
                 </div>
               ))

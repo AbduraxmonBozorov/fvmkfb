@@ -11,36 +11,31 @@ import Davomat from "./pages/rahbariyat/Davomat";
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
-  const token = localStorage.getItem("token")
-    ? localStorage.getItem("token")
-    : null;
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
   const [message, setMessage] = useState("");
-  const [user, setUser] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      navigate("/");
-    } else {
+    if (!token) {
       navigate("/login");
+      setIsAuthenticated(false);
+    } else {
+      setIsAuthenticated(true);
     }
-  }, []);
+  }, [token, navigate]);
 
   useEffect(() => {
-    message.length ? toast(message) : "";
+    if (message.length) {
+      toast(message);
+    }
   }, [message]);
-
-  useEffect(() => {
-    setIsAuthenticated(!!token);
-  }, [token]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("auth");
     setMessage("Siz tizimdan muvoffaqiyatli chiqdiz!");
     setIsAuthenticated(false);
+    setToken(null);
     navigate("/login");
   };
 
@@ -125,11 +120,12 @@ function App() {
             isAuthenticated ? (
               <Navigate to="/" replace />
             ) : (
-              <Login setMessage={setMessage} />
+              <Login setMessage={setMessage} setToken={setToken} />
             )
           }
         />
 
+        {/* Settings */}
         <Route
           path="/settings"
           element={

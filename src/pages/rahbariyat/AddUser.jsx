@@ -5,7 +5,7 @@ import FamilyTable from "../../components/familyTable/FamilyTable";
 function AddUser({ setMessage }) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [role, setRole] = useState("hodim");
+  const [role, setRole] = useState("xodim");
   const [birth_date, setBirth_Date] = useState("");
   const [address, setAddress] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -31,7 +31,7 @@ function AddUser({ setMessage }) {
       organization_name: jobPlace,
       department: department,
       position,
-      stir: 200147396
+      stir: 200147396,
     };
 
     let workExperiences1 = [...workExperiences, newJob];
@@ -71,7 +71,7 @@ function AddUser({ setMessage }) {
     formData.append("edu", JSON.stringify(newEmployee.edu));
     formData.append("familyMembers", JSON.stringify(familyMembers));
     formData.append("work_experience", JSON.stringify(workExperiences1));
-    
+
     try {
       const response = await fetch(`/user/register`, {
         method: "POST",
@@ -81,6 +81,8 @@ function AddUser({ setMessage }) {
       if (response.ok) {
         const result = await response.json();
         setMessage(result.message);
+        
+        
       } else {
         console.error("Serverda xatolik:", response.status);
         setMessage(response.status);
@@ -309,7 +311,7 @@ function AddUser({ setMessage }) {
                   id="role"
                   className="select bg-white text-black w-full"
                 >
-                  <option value="hodim">Hodim</option>
+                  <option value="xodim">Xodim</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>
@@ -348,17 +350,17 @@ function AddUser({ setMessage }) {
                   Ma'lumoti
                 </label>
                 <div className="mt-2">
-                  <input
-                    value={education}
+                  <select
                     onChange={(e) => {
                       setEducation(e.target.value);
                     }}
-                    type="text"
                     name="education"
+                    className="select select-sm w-full"
                     id="education"
-                    autoComplete="education"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  />
+                  >
+                    <option value="oliy">Oliy</option>
+                    <option value="o'rta maxsus">O'rta maxsus</option>
+                  </select>
                 </div>
               </div>
 
