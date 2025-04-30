@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { Home, Users, FileText, Settings, LogOut, CalendarDays } from "lucide-react";
+import {
+  Home,
+  Users,
+  FileText,
+  Settings,
+  LogOut,
+  CalendarDays,
+  Axe
+} from "lucide-react";
 import { baseURL } from "../utils/config";
-
-
 
 const sidebarVariants = {
   open: { x: 0 },
@@ -55,8 +61,8 @@ export default function Layout({ children, handleLogout }) {
               <span>Xodim qo'shish</span>
             </Link>
           </li>
-        {/* Davomat */}
-        <li>
+          {/* Davomat */}
+          <li>
             <Link
               to="/davomat"
               className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2"
@@ -66,6 +72,16 @@ export default function Layout({ children, handleLogout }) {
             </Link>
           </li>
 
+          {/* Qurilish */}
+          {/* <li>
+            <Link
+              to="/qurilish"
+              className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 rounded-md p-2"
+            >
+              <Axe size={20} />
+              <span>Qurilish</span>
+            </Link>
+          </li> */}
 
           <li>
             <Link

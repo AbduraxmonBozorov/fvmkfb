@@ -8,6 +8,7 @@ import Tasks from "./pages/Tasks";
 import AddUser from "./pages/rahbariyat/AddUser";
 import Settings from "./pages/Settings";
 import Davomat from "./pages/rahbariyat/Davomat";
+import Qurilish from "./pages/rahbariyat/Qurilish";
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
@@ -64,6 +65,20 @@ function App() {
             isAuthenticated ? (
               <MainLayout handleLogout={handleLogout}>
                 <Davomat onLogout={handleLogout} />
+              </MainLayout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Qurilish */}
+        <Route
+          path="/qurilish"
+          element={
+            isAuthenticated ? (
+              <MainLayout handleLogout={handleLogout}>
+                <Qurilish onLogout={handleLogout} />
               </MainLayout>
             ) : (
               <Navigate to="/login" replace />
